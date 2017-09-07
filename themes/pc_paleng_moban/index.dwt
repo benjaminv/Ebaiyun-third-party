@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" -->
+<!-- TemplateEndEditable -->
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link rel="alternate" type="application/rss+xml" title="RSS|{$page_title}" href="{$feed_url}" />
+<link rel="stylesheet" type="text/css" href="themes/pc_paleng_moban/css/index.css" />
+<script type="text/javascript" src="themes/pc_paleng_moban/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="themes/pc_paleng_moban/js/jump.js"></script>
+<script type="text/javascript" src="themes/pc_paleng_moban/js/tab.js"></script>
+<script type="text/javascript">
+var compare_no_goods = "{$lang.compare_no_goods}";
+var btn_buy = "{$lang.btn_buy}";
+var is_cancel = "{$lang.is_cancel}";
+var select_spe = "{$lang.select_spe}";
+</script>
+{insert_scripts files='jquery.json.js,transport.js'}
+{insert_scripts files='common.js,index.js'}
+</head>
+<body style="background: #f5f5f5">{insert name='add_url_uid'}
+	<!-- #BeginLibraryItem "/library/page_header_index.lbi" --><!-- #EndLibraryItem -->
+	
+    <div class="banner">
+		<!-- #BeginLibraryItem "/library/index_ad.lbi" --><!-- #EndLibraryItem -->
+    </div>
+    
+
+
+<div class="index-box index-top" style="display: none;">
+  <h2>
+      <i></i>
+      <span class="span-txt">一元抽奖区</span>
+  </h2>
+  <div class="draw-content">
+      <div class="draw-content-left">
+<!-- TemplateBeginEditable name="一元抽奖区左侧广告" -->
+<!-- #BeginLibraryItem "/library/ad_position.lbi" --><!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+      </div>
+      <div class="draw-content-right">
+         <div class="draw-content-right-top">
+            <div class="draw-content-right-left">
+            <!-- TemplateBeginEditable name="一元抽奖区中间广告" -->
+<!-- #BeginLibraryItem "/library/ad_position.lbi" --><!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+        
+              <div class="draw-content-right-cover">
+                <a href="lucky_buy.php">
+                    <span class="span-txt">一元开抢</span>
+                    <span class="span-btn">前去抽奖</span>
+                </a>
+              </div>
+            </div>
+            <div class="draw-content-right-right">
+               <!-- TemplateBeginEditable name="一元抽奖区右侧广告" -->
+<!-- #BeginLibraryItem "/library/ad_position.lbi" --><!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+            </div>
+         </div>
+         <div class="draw-content-right-down">
+            <ul  id='draw_good'>
+            <!-- {foreach from=$draw_goods item=goods} -->
+                <li>
+                    <a href="{$goods.url}"><img src="{$goods.goods_thumb}" width="133px" height="133px"></a>
+                </li>
+             <!-- {/foreach} -->
+      
+            </ul>
+            <div class="draw-content-right-go" id='draw_replace' data-num=2>
+               <a href="javascript:void(0)">
+                   <i></i>
+                   <span>换一批</span>
+               </a>
+            </div>
+         </div>
+      </div>
+  </div>
+</div>
+
+
+
+<div class="index-box index-line">
+   <div class="line-left"></div>
+   <div class="line-middle">
+     <i></i>
+   </div>
+    <div class="line-left"></div>
+</div>
+
+	<!-- #BeginLibraryItem "/library/recommend_tg.lbi" --><!-- #EndLibraryItem -->
+    <!-- #BeginLibraryItem "/library/index_ad_groups.lbi" --><!-- #EndLibraryItem -->
+
+	<div class="w1210 floor-list">
+<!-- TemplateBeginEditable name="商品分类楼层" -->
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" --><!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" --><!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+	</div>
+<!-- #BeginLibraryItem "/library/recommend_new.lbi" --><!-- #EndLibraryItem -->	
+    <script type="text/javascript" src="themes/pc_paleng_moban/js/indexPrivate.min.js"></script>
+    <!-- #BeginLibraryItem "/library/right_sidebar.lbi" --><!-- #EndLibraryItem -->
+    <!-- #BeginLibraryItem "/library/page_footer_index.lbi" --><!-- #EndLibraryItem -->
+    <!-- #BeginLibraryItem "/library/arrive_notice.lbi" --><!-- #EndLibraryItem -->
+</body>
+<script type="text/javascript" src="themes/pc_paleng_moban/js/home_index.js"></script>
+<script type="text/javascript">
+	$(".brand-con").hover(function(){
+		var num = $(this).find("li").length;
+		if(num > 10){
+			$(this).find(".brand-btn").fadeTo('fast',0.4);	
+		}
+	},
+	function(){
+		$(this).find(".brand-btn").fadeTo('fast',0);	
+	})
+  //换一批
+  $('#draw_replace').on('click',function() {
+      var obj = $(this);
+      var page = obj.attr("data-num");
+      $.ajax({
+            url: "index.php?act=ajax_draw&page="+page,
+            type: 'GET',
+            dataType: 'json',
+            success: function(res) {
+               html = "";
+               $.each(res, function(k, v){
+                    html += "<li>";
+                    html += "<a href='"+v.url+"'>";
+                    html += "<img src='"+v.goods_thumb+"' width=133px height=133px/>";
+                    html += "</a>";
+                    html += "</li>";
+                });
+               $("#draw_good").html(html);
+               obj.attr("data-num",page*1+1);
+            },
+            error: function(){
+                //alert('与服务交互错误，请稍后再试！');
+            }
+        });
+  })
+  
+</script>
+</html>

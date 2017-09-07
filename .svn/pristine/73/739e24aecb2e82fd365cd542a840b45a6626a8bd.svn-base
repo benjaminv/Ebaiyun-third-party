@@ -1,0 +1,62 @@
+﻿<!-- $Id: wj_lottery_group_info.htm 14216 2008-03-10 02:27:21Z testyang $ -->
+{include file="pageheader.htm"}
+{insert_scripts files="validator.js,../js/utils.js"}
+
+
+
+<form method="post" action="wj_lottery_group.php?act=insert_update" name="theForm" onsubmit="return validate()">
+<div class="main-div">
+<table id="group-table" cellspacing="1" cellpadding="3" width="100%">
+
+  <tr>
+    <td class="label">组别名称：</td>
+    <td><input type="text"  id="lg_name" name="lg_name" size="20" value="{$wj_lottery_group.lg_name}" /></td>
+  </tr>
+<tr>
+    <td class="label"><a href="javascript:showNotice('noticPro');" title="{$lang.form_notice}"><img src="images/notice.gif" width="16" height="16" border="0" alt="{$lang.form_notice}"></a>中奖概率：</td>
+    <td><input type="text"  id="lg_pro" name="lg_pro" size="20" value="{$wj_lottery_group.lg_pro}" /></td>
+  </tr>
+  <tr>  
+    <td>
+  </td>	
+	<td>
+		<span class="notice-span" {if $help_open}style="display:block" {else} style="display:none" {/if} id="noticPro">请输入大于1的整数.中奖概率为1/x</span> 
+	</td>
+  </tr>
+  <tr>
+    <td class="label">备注：</td>
+    <td><textarea  name="remark" cols="30" rows="3"  >{$wj_lottery_group.lg_remark}</textarea></td>
+  </tr>
+
+  <tr>
+    <td class="label">&nbsp;</td>
+    <td>
+      <input name="id" type="hidden" id="id" value="{$wj_lottery_group.id}">
+      <input type="submit" name="submit" value="{$lang.button_submit}" class="button" />
+      <input type="reset" value="{$lang.button_reset}" class="button" />
+    </td>
+  </tr>
+</table>
+</div>
+</form>
+<script language="JavaScript">
+<!--
+{literal}
+
+/**
+ * 检查表单输入的数据
+ */
+function validate()
+{
+  validator = new Validator("theForm");
+  var eles = document.forms['theForm'].elements;
+
+  validator.required("lg_name", 	"组别名称不能为空");
+  validator.isInt("lg_pro", 		"中奖概率应该是整数", true);
+  return validator.passed();
+}
+//-->
+{/literal}
+</script>
+
+{include file="pagefooter.htm"}

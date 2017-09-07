@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" -->
+<!-- TemplateEndEditable -->
+  <link rel="stylesheet" type="text/css" href="themes/pc_paleng_moban/css/extpt.css" />
+
+  <link rel="stylesheet" type="text/css" href="themes/pc_paleng_moban/css/user.css" />
+<script type="text/javascript" src="themes/pc_paleng_moban/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="themes/pc_paleng_moban/js/jquery.validate.js"></script>
+<script type="text/javascript" src="themes/pc_paleng_moban/js/messages_zh.js"></script>
+{insert_scripts files='jquery.json.js,transport.js'} 
+{insert_scripts files='common.js,user.js'}
+<script>
+/* PRINCE */
+function goBack(){  
+   if(history.length > 1 ){  
+          history.back(-1);  
+    }else{  
+          location.href = 'index.php';
+    }  
+}
+</script>
+</head>
+<body>
+
+<!-- #BeginLibraryItem "/library/page_header_normal.lbi" --><!-- #EndLibraryItem -->
+<div class="margin-w1210 clearfix"> <!-- #BeginLibraryItem "/library/ur_here.lbi" --><!-- #EndLibraryItem -->
+  <div class="user-left"> 
+  <!-- #BeginLibraryItem "/library/user_menu.lbi" --><!-- #EndLibraryItem --> 
+  </div>
+  <div class="user-right">
+    <div class="box">
+<div class="tabmenu">
+            <ul class="tab">
+              <li class="active"> <a href="#">我的拼团</a> </li>
+            </ul>
+          </div>
+<div id="page">
+  <div class="srp list flex-f-row" id="J_ItemList" >
+    <div class="product flex_in single_item" >
+      <div class="pro-inner" ></div>
+      <div class="pro-pt_inner"></div>
+    </div>
+    <a href="javascript:;" class="get_more"></a> </div>
+
+  </div>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="mobile/themesmobile/mo_paleng_moban/js/jquery.more.js"></script> 
+<script type="text/javascript">
+jQuery(function($){
+	$('#J_ItemList').more({'address': 'extpintuan.php?act=asyncuserlist', 'spinner_code':'<div style="text-align:center; margin:10px;"><img src="themes/pc_paleng_moban/loader.gif" width="12" height="12" /></div>'})
+	$(window).scroll(function () {
+		if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+			$('.get_more').click();
+		}
+	});
+});
+</script>
+  <!-- #BeginLibraryItem "/library/page_footer.lbi" -->
+  <!-- #EndLibraryItem -->
+  <!-- #BeginLibraryItem "/library/footer_nav.lbi" -->
+  <!-- #EndLibraryItem -->
+</body>
+</html>

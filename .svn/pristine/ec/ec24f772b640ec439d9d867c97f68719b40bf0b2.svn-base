@@ -1,0 +1,71 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+ <!-- 店铺信息 -->
+        <div class="business-box business-description">
+          <h3><a href="supplier.php?suppId={$smarty.get.suppId}">{$shopname}</a></h3>
+          <div class="description">
+            <div class="item">
+              <div>描述</div>
+              <p class="tc mt5">{if $c_rank gt 0}{$c_rank}{else}5{/if}</p>
+            </div>
+            <div class="ml15 item">
+              <div>服务</div>
+              <p class="tc mt5">{if $serv_rank gt 0}{$serv_rank}{else}5{/if}</p>
+            </div>
+            <div class="ml15 item">
+              <div>物流</div>
+              <p class="tc mt5">{if $shipp_rank gt 0}{$shipp_rank}{else}5{/if}</p>
+            </div>
+          </div>
+          <div class="mb15 btns">
+            <a class="ml20 goto-business" href="supplier.php?suppId={$smarty.get.suppId}">进店逛逛</a>
+            <a class="ml20 book-mark" onclick="guanzhu({$smarty.get.suppId})">收藏店铺</a>
+          </div>
+        </div>
+        <!-- 本店搜索 -->
+        <div class="mt10 business-box business-search">
+          <h3>本店搜索</h3>
+
+          <form id="searchForm" name="searchForm" method="get" action="/supplier.php">
+          <input type='hidden' name='go' value='search'>
+          <input type='hidden' name='suppId' value='{$smarty.request.suppId}'>
+          <div class="description">
+            <div class="ml15 item">
+              <span class="fl">关键字</span>
+              <div class="input-box">
+<input class="fl" name="keywords" type="text" id="su_keyword" value='{$smarty.request.keywords|default:请输入你要查找的商品}' onClick="javascript:this.value='';"/>
+              </div>
+            </div>
+            <div class="ml15 mt10 item">
+              <span class="fl">价格</span>
+              <div class="input-box">
+                
+               {if $search_price }
+          <select name="price" class="su-select" style="float:left;">
+          {foreach from=$search_price item=region key=key}
+            <option class="su-option" value="{$key}" {if $smarty.request.price eq $key}selected{/if}>{$region}</option>
+            
+                {/foreach}
+        
+          </select>
+          {/if}
+                
+              </div>
+            </div>
+          </div>
+          <div class="mb15 tc btns">
+            <input class="goto-business icons search-btn-i"  type="submit" id="btsearch" value="搜 索" />
+          </div>
+ </form>
+
+
+        </div>
+
+
+
+
+          
+          
+          
+          
+       

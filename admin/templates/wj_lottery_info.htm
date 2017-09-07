@@ -1,0 +1,258 @@
+﻿<!-- $Id: wj_lottery_info.htm 14216 2008-03-10 02:27:21Z testyang $ -->
+{include file="pageheader.htm"}
+<script type="text/javascript" src="../js/calendar.php?lang={$cfg_lang}"></script>
+<link href="../js/calendar/calendar.css" rel="stylesheet" type="text/css" />
+{insert_scripts files="validator.js,../js/utils.js"}
+
+
+
+<!-- 商品搜索 -->
+<div class="form-div">
+  <form action="javascript:searchGoods()" name="searchForm">
+    <img src="images/icon_search.gif" width="26" height="22" border="0" alt="SEARCH" />
+    <!-- 分类 -->
+    <select name="cat_id"><option value="0">所有分类</caption>{$cat_list}</select>
+    <!-- 品牌 -->
+    <select name="brand_id"><option value="0">所有品牌</caption>{html_options options=$brand_list}</select>
+    <!-- 关键字 -->
+    <input type="text" name="keyword" size="20" />
+    <input type="submit" value="{$lang.button_search}" class="button" />
+  </form>
+</div>
+
+<form method="post" action="wj_lottery.php?act=insert_update" name="theForm" onsubmit="return validate()">
+<div class="main-div">
+<table id="group-table" cellspacing="1" cellpadding="3" width="100%">
+  <tr>
+    <td class="label">商品名称：</td>
+    <td><select name="goods_id" onchange="javascript:getPrice(this);">
+      {if $wj_lottery.id}
+      <option value="{$wj_lottery.goods_id}">{$wj_lottery.goods_name}</option>
+      {else}
+      <option value="0">请先搜索商品,在此生成选项列表...</option>
+      {/if}
+    </select>&nbsp;&nbsp;商品价值:<label id="shop_price2">{$wj_lottery.shop_price}</label>
+	<input type="hidden" id="shop_price" name="shop_price" value="{$wj_lottery.shop_price}" />
+	</td>
+  </tr>
+  <tr>
+  	<td class="label">参与人数：</td>
+	<td><input type="text" id="total" name="total" size="20" value="{$wj_lottery.total}"/>
+		<input type="hidden" id="outnum" name="outnum" size="20" value="{$wj_lottery.outnum}"/>
+	</td>
+  </tr>
+  <tr>
+    <td class="label"><a href="javascript:showNotice('noticPoint');" title="{$lang.form_notice}"><img src="images/notice.gif" width="16" height="16" border="0" alt="{$lang.form_notice}"></a>消耗金额：</td>
+    <td><input type="text"  id="point" name="point" size="20" value="{$wj_lottery.point}" /></td>
+  </tr>
+  <tr>  
+    <td>
+  </td>	
+	<td>
+		<span class="notice-span" {if $help_open}style="display:block" {else} style="display:none" {/if} id="noticPoint">抽奖一次所消耗的金额</span> 
+	</td>
+  </tr>
+  <!-- <tr>
+    <td class="label"><a href="javascript:showNotice('noticPro');" title="{$lang.form_notice}"><img src="images/notice.gif" width="16" height="16" border="0" alt="{$lang.form_notice}"></a>中奖概率：</td>
+    <td>开始时间</td>
+    <td>
+    	<input type="text"  id="begin" name="begin" size="20" value="{$wj_lottery.begin}"/>
+    	<input type="text"  id="pro" name="pro" size="20" value="1" onchange="javascript:prochange(this.value);" style="display:none;"/>
+		&nbsp;&nbsp;<label id="proper">{$wj_lottery.proper}</label>
+	</td>
+  </tr> -->
+ <tr>  
+    <td class="label">
+  		结束时间
+  	</td>	
+	<td>
+		<input type="text"  id="pro" name="pro" size="20" value="1" onchange="javascript:prochange(this.value);" style="display:none;"/>
+		<!-- <span class="notice-span" {if $help_open}style="display:block" {else} style="display:none" {/if} id="noticPro">请输入大于1的整数.中奖概率为1/x</span>-->
+		<input name="end" type="text" id="end_time" size="22" value="{$wj_lottery.end|times}" readonly="readonly" />
+		<input name="selbtn1" type="button" id="selbtn1" onclick="return showCalendar('end_time', '%Y-%m-%d %H:%M', '24', false, 'selbtn1');" value="选择" class="button"/>
+	</td>
+  </tr>
+  <tr>
+  <!-- <td class="label"><a href="javascript:showNotice('noticWinnum');" title="{$lang.form_notice}"><img src="images/notice.gif" width="16" height="16" border="0" alt="{$lang.form_notice}"></a>中奖号码：</td> -->
+    <td><input type="text"  id="winnum" name="winnum" size="20" value="1" style="display:none;"/>
+	</td>
+  </tr>
+ <tr>  
+    <td>
+  </td>	
+	<!-- <td>
+		<span class="notice-span" {if $help_open}style="display:block" {else} style="display:none" {/if} id="noticWinnum">若随机出来的数等于此数即为中奖<br />
+		随机区间为1到中奖概率的闭区间,即此数应属于[1,x]
+		</span> 
+	</td> -->
+  </tr>
+  <tr>
+    <!-- <td class="label">组别：</td> -->
+    <td><select name="lg_id" onchange="javascript:lgchange(this);" style="display:none;">
+      <option value="1" selected="selected">{$wj_lottery.lg_name}</option>
+	</select>&nbsp;&nbsp;<!-- <input type="button" value="搜索组别" onclick="javascript:searchlg()" class="button"/> -->
+	</td>
+  </tr>
+  <tr>
+  <td class="label">备注：</td>
+    <td><textarea  name="remark" cols="30" rows="3"  >{$wj_lottery.remark}</textarea></td>
+  </tr>
+
+  <tr>
+    <td class="label">&nbsp;</td>
+    <td>
+      <input name="id" type="hidden" id="id" value="{$wj_lottery.id}" />
+	  <input name="status" type="hidden" id="status" value="{$wj_lottery.status}" />
+      <input type="submit" name="submit" value="{$lang.button_submit}" class="button" />
+      <input type="reset" value="{$lang.button_reset}" class="button" />
+	  {if $wj_lottery.status eq 1}
+      <input type="submit" name="finish" value="结束抽奖" class="button" onclick="return confirm('确定结束该商品抽奖吗?')"/>
+	  {elseif $wj_lottery.status eq 0 and $wj_lottery.id gt 0}
+	  <input type="submit" name="start" value="加入抽奖" class="button" onclick="return confirm('确定将该商品加入抽奖吗?')"/>
+	  {elseif $wj_lottery.status eq 2}
+	  <input type="submit" name="restart" value="重新抽奖" class="button" onclick="return confirm('确定将该商品重新加入抽奖吗?')"/>
+	  {/if}
+    </td>
+  </tr>
+</table>
+</div>
+</form>
+<script language="JavaScript">
+<!--
+{literal}
+
+/**
+ * 检查表单输入的数据
+ */
+ 
+function validate()
+{
+  validator = new Validator("theForm");
+  var eles = document.forms['theForm'].elements;
+
+  var goods_id = eles['goods_id'].value;
+  if (goods_id <= 0)
+  {
+    validator.addErrorMsg("商品不能为空");
+  }
+  validator.isInt("point", 	"消耗积分应该是整数", true);
+  validator.isInt("pro", 	"中奖概率应该是整数", true);
+  validator.isInt("winnum", "中奖号码应该是整数", true);
+  validator.isInt("total",  "抽奖数量应该是整数", true);
+  return validator.passed();
+}
+function searchlg()
+{
+
+  Ajax.call('wj_lottery.php?act=search_lg', '', searchlgResponse, 'GET', 'JSON');
+ 
+}
+
+function searchlgResponse(result)
+{
+  if (result.error == '1' && result.message != '')
+  {
+    alert(result.message);
+	return;
+  }
+
+  var sel = document.forms['theForm'].elements['lg_id'];
+
+  sel.length = 0;
+
+  /* 创建 options */
+  var lg = result.content;
+  if (lg)
+  {
+    for (i = 0; i < lg.length; i++)
+    {
+      var opt = document.createElement("OPTION");
+      opt.value = lg[i].id;
+      opt.text  = lg[i].lg_name;
+	  opt.title  = lg[i].lg_pro;
+      sel.options.add(opt);
+    }
+	lgchange(sel);
+  }
+  else
+  {
+    var opt = document.createElement("OPTION");
+    opt.value = 0;
+    opt.text  = search_is_null;
+    sel.options.add(opt);
+  }
+ 
+  return;
+}
+function prochange(value)
+{
+	document.getElementById('proper').innerHTML="("+(1.00/value)*100+"%)";
+}
+function lgchange(obj)
+{
+ 	document.getElementById('pro').value=obj.options[obj.options.selectedIndex].title;
+  	prochange(obj.options[obj.options.selectedIndex].title);
+}
+/**
+ *根据商品得到价格
+ */
+ function getPrice(obj)
+ {
+     document.getElementById('shop_price').value=obj.options[obj.options.selectedIndex].title; 
+	 document.getElementById('shop_price2').innerHTML=obj.options[obj.options.selectedIndex].title; 
+ }
+/**
+ * 搜索商品
+ */
+function searchGoods()
+{
+  var filter = new Object;
+  filter.cat_id   = document.forms['searchForm'].elements['cat_id'].value;
+  filter.brand_id = document.forms['searchForm'].elements['brand_id'].value;
+  filter.keyword  = document.forms['searchForm'].elements['keyword'].value;
+
+  Ajax.call('wj_lottery.php?is_ajax=1&act=search_goods', filter, searchGoodsResponse, 'GET', 'JSON');
+}
+
+function searchGoodsResponse(result)
+{
+  if (result.error == '1' && result.message != '')
+  {
+    alert(result.message);
+	return;
+  }
+
+  var sel = document.forms['theForm'].elements['goods_id'];
+
+  sel.length = 0;
+
+  /* 创建 options */
+  var goods = result.content;
+  if (goods)
+  {
+    for (i = 0; i < goods.length; i++)
+    {
+      var opt = document.createElement("OPTION");
+      opt.value = goods[i].goods_id;
+      opt.text  = goods[i].goods_name;
+	  opt.title  = goods[i].shop_price;
+      sel.options.add(opt);
+    }
+  }
+  else
+  {
+    var opt = document.createElement("OPTION");
+    opt.value = 0;
+    opt.text  = search_is_null;
+    sel.options.add(opt);
+  }
+  getPrice(sel);
+  return;
+}
+
+
+//-->
+{/literal}
+</script>
+
+{include file="pagefooter.htm"}

@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+
+</head>
+<body>
+	<div style="padding:50px;text-align:center;" onclick="test();">测试</div>
+</body>
+<script>
+	function test(){
+		api.openFrame({
+			name: 'test',
+			url: './html/main.html',
+			rect: {
+				x: 0,
+				y: 0,
+				w: 'auto',
+				h: 'auto'
+			}
+		});
+	}
+</script>
+<html>

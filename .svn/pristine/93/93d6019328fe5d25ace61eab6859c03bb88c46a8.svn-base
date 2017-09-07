@@ -1,0 +1,343 @@
+<!DOCTYPE html >
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" -->
+<!-- TemplateEndEditable -->
+  <meta name="Keywords" content="{$keywords}" />
+  <meta name="Description" content="{$description}" />
+  <link rel="stylesheet" type="text/css" href="themes/pc_paleng_moban/css/extpt.css" />
+  <link rel="stylesheet" type="text/css" href="themes/pc_paleng_moban/css/user.css" />
+ <script type="text/javascript" src="mobile/themesmobile/mo_paleng_moban/js/jquery.js"></script>
+{insert_scripts files='jquery.json.js,transport.js'} 
+{insert_scripts files='common.js,user.js'}
+
+<script type="text/javascript">
+// 筛选商品属性
+jQuery(function($) {
+  $(".info").click(function(){
+    $('.goodsBuy .fields').slideToggle("fast");
+  });
+})
+onload = function(){
+    document.getElementById('goods_number').value = 1;//更新数量
+    document.getElementById('number').value = 1;//更新数量
+}
+
+function changenum(diff) {
+  var num = parseInt(document.getElementById('goods_number').value);
+  var goods_number = num + Number(diff);
+  if( goods_number >= 1){
+    document.getElementById('goods_number').value = goods_number;//更新数量
+    document.getElementById('number').value = goods_number;//更新数量
+  }
+}
+</script>
+
+<script>
+/* 生成随机价格 */
+var g_Interval = 1;
+var g_Min_price = {$extpintuan.min_price};//下限
+var g_Max_price = {$extpintuan.max_price};//上限
+var choose_number={$extpintuan.choose_number};
+var act_id = {$extpintuan.act_id};
+var level = {$extpintuan.level};
+var g_Timer;
+var running = false;
+function beginRndNum(trigger){
+     document.getElementById('click_a').style.display = 'none'; 
+     document.getElementById('click_b').style.display = 'block';  
+  if(running){
+    running = false;
+    clearTimeout(g_Timer);  
+    var price=document.getElementById('price').value;
+        Ajax.call('extpintuan.php', 'act=setprice&act_id=' + act_id + '&price=' + price+ '&level=' + level, setPriceResponse, 'GET', 'JSON');
+  }
+  else{
+    running = true;
+    beginTimer();
+    g_Timer = setTimeout(beginRndNum, 2000);
+    
+  }
+}
+
+function setPriceResponse(res){
+}
+function updateRndNum(){
+  var num = (Math.random()*(g_Max_price-g_Min_price)+g_Min_price).toFixed(2);
+  var newnum=(Array(8).join(0) + num).slice(-8);
+  $('#chouqujiage_b').html('立即参团'+"&nbsp;&gt;");
+  $('#ResultPrice_b').html('¥'+num+'元');
+  document.getElementById('price').value = num;
+}
+
+function beginTimer(){
+  g_Timer = setTimeout(beat, g_Interval);
+}
+
+function beat() {
+  g_Timer = setTimeout(beat, g_Interval);
+  updateRndNum();
+
+}
+</script>
+
+{* 包含脚本文件 *}
+{insert_scripts files='common.js,lefttime.js,transport.js'}
+<script type="text/javascript">
+  {foreach from=$lang.js_languages item=item key=key}
+    var {$key} = "{$item}";
+  {/foreach}
+</script>
+
+<script>
+function goBack(){  
+   if(history.length > 1 ){  
+          history.back(-1);  
+    }else{  
+          location.href = 'index.php';
+    }  
+} 
+</script>
+</head>
+<body>
+
+
+{insert name='add_url_uid'}
+<!-- #BeginLibraryItem "/library/page_header_normal.lbi" --><!-- #EndLibraryItem -->
+
+
+<div class="w1210"> <!-- #BeginLibraryItem "/library/ur_here.lbi" --><!-- #EndLibraryItem -->
+  <div class="user-left"> 
+  <!-- #BeginLibraryItem "/library/user_menu.lbi" --><!-- #EndLibraryItem --> 
+  </div>
+  <div class="user-right">
+    <div class="box">
+<div class="tabmenu">
+            <ul class="tab">
+              <li class="active"> <a href="#">我的拼团</a> </li>
+            </ul>
+          </div>
+      <div id="page"> 
+  <!--商品图-->
+  <section class="goods_slider" style="padding:10px;">
+    <a href="extpintuan.php?act=view&act_id={$extpintuan.act_id}&level={$extpintuan.level}&u={$user_id}">
+    <table>
+    <tr>
+    <td rowspan="2" style="" >
+    <div style="margin-left:5px; margin-top:5px; width:100px; height:68px;padding:2px;background-image:url({if strpos($extpintuan.goods_thumb,'ttp')>0}{else}../{/if}{$extpintuan.goods_thumb});background-size:auto 100%; background-repeat:no-repeat;"></div>
+    </td>
+    <td style="font-size:14px; line-height:15px;padding:5px; padding-left:10px; " > {$extpintuan.act_name|escape:html}</td>
+  </tr>
+    <tr>
+    <td style="font-size:12px; padding-left:10px; line-height:2; "> {$extpintuan.this_need_people}人团:<em style="color:#FF0000">{if $extpintuan.show_price}{$extpintuan.show_price}{else}{/if}元</em><br/>
+    点此查看详情>>
+    </td>
+    </tr>
+    </table>
+    <!-- {if $extpintuan.status eq 1 || $extpintuan.status eq 3 || $extpintuan.status eq 4} -->
+    <div class="pt_gs_status"><img src="mobile/themesmobile/mo_paleng_moban/images/extpt_success.png" /></div>
+    <!-- {elseif $extpintuan.status eq 2 } -->
+    <div class="pt_gs_status"><img src="mobile/themesmobile/mo_paleng_moban/images/extpt_fail.png" /></div>
+    <!-- {/if } -->
+    </a>
+  </section>
+  <!--商品图 end--> 
+
+
+
+    <!-- {if $extpintuan.status eq 0 && $extpintuan.choose_number eq 1 } -->
+    <section class="goodsBuy " style="margin-top:-10px;border-bottom:solid 1px #999;" >
+        <div class="fields" style=" display:block;">
+          <ul class="quantity">
+            <div class="items">  <span style="color:#999">购买数量：</span> <span class="ui-number radius5">
+              <button type="button" class="decrease radius5" onclick="changenum(-1)">-</button>
+              <input class="num" name="number" id="goods_number" autocomplete="off" value="1" min="1" max="" type="number" />
+              <button type="button" class="increase radius5" onclick="changenum(1)">+</button>
+              </span> </div>
+          </ul>
+        </div>
+    </section>         
+    <!-- {/if}  -->
+
+
+
+  <!--头像列表 S  PRINCE  120029121-->       
+  <section class="headimgs">
+         <!-- {if $extpintuan_orders } -->
+             <!-- {foreach from=$extpintuan_orders item=item} -->
+                <!-- {if $item.follow_user_head } -->
+                <div class="imgbox">
+                <!--{ if $item.act_user eq $item.follow_user} --><div class="tzbox">团长</div><!--{/if }-->
+        <!--{ if $item.pt_user_seq eq 2} --><div class="sfbox">沙发</div><!--{/if }-->
+                <img src="{$item.follow_user_head}"></div>
+                <!--{else}-->
+                <div class="imgbox">
+                <!--{ if $item.act_user eq $item.follow_user} --><div class="tzbox">团长</div><!--{/if }-->
+        <!--{ if $item.pt_user_seq eq 2} --><div class="sfbox">沙发</div><!--{/if }-->
+                <img src="mobile/themesmobile/mo_paleng_moban/images/extpt_icon_index.png"></div>
+                <!--{/if }-->
+              <!-- {/foreach} --> 
+        <!--{/if }-->
+         <!-- {if $virtual_touxiang } -->
+             <!-- {foreach from=$virtual_touxiang item=item} -->
+                <div class="imgbox"><img src="mobile/themesmobile/mo_paleng_moban/images/extpt_usercenter_customer.png"></div>
+              <!-- {/foreach} --> 
+        <!--{/if }-->
+  </section>  
+  <!--头像列表 E  PRINCE  120029121-->   
+  
+      
+
+  <!--提示部分  PRINCE  120029121-->       
+  <section style="text-align:center;clear:both;" >
+      <!-- {if $extpintuan.available_people } -->
+      <div style="font-size:14px;padding-top:20px; width:100%"><br />还差&nbsp;<em style="color:#FF0000; font-size:18px;">{$extpintuan.available_people}</em>&nbsp;人,盼你如北方人盼暖气</div>       
+      <!--{/if }-->
+      
+      <div class="hdsysj_box">
+    <!-- {if $extpintuan.status eq 1 ||  $extpintuan.status eq 3 ||  $extpintuan.status eq 4} -->
+      <font color="#769E54">对于诸位大侠的相助，团长感激涕零。</font>
+    <!-- {elseif $extpintuan.status eq 2 } -->
+          拼团失败
+    <!--{else}-->
+      剩余-<span id="leftTime">{$lang.please_waiting}</span>-结束
+    <!--{/if }-->
+      </div>
+  </section>
+  <!--提示部分   PRINCE  120029121-->       
+
+
+  <!--团长部分  PRINCE  120029121-->       
+  <section style="text-align:center">
+  <div style="height:15px;"><img src="mobile/themesmobile/mo_paleng_moban/images/extpt_sanjiao.png"  /></div>
+  <div class="tzboderhr">
+  <div class="dleft">
+      <!--{if $extpintuan.user_head}-->
+         <img src="{$extpintuan.user_head}">
+         <!--{else}-->
+         <img src="mobile/themesmobile/mo_paleng_moban/images/extpt_icon_index.png">
+        <!--{/if }-->
+  </div>
+
+  <div class="dright"><div style="height:30px;line-height:30px;"><div style="float:left;">团长：<b>{$extpintuan.user_nickname}</b> </div></div>
+  <div style="width:100%;height:20px; text-align:left;">发起时间：{$extpintuan.create_time}</div>
+  </div>
+  </section>
+  <!--团长部分  PRINCE  120029121-->   
+  
+  
+  <!--成员部分  PRINCE  120029121-->       
+  <section style="text-align:center">
+    <!-- {foreach from=$extpintuan_orders item=item} -->
+    <!--{ if $item.pt_user_seq eq 2} -->
+  <div class="sfboderhr">
+  <div class="dleft">
+      <!--{if $item.user_head}-->
+         <img src="{$item.user_head}">
+         <!--{else}-->
+         <img src="mobile/themesmobile/mo_paleng_moban/images/extpt_icon_index.png">
+        <!--{/if }-->
+  </div>
+  <div class="dright"><div style="height:30px;line-height:30px;"><div style="float:left;">沙发：<b>{$item.follow_user_nickname}</b> </div></div>
+  <div style="width:100%;height:20px; text-align:left;">参团时间：{$item.formated_follow_time}</div>
+  </div>
+  </div>
+  <!--{/if }-->
+  <!-- {/foreach} -->      
+    <!-- {foreach from=$extpintuan_orders item=item} -->
+    <!--{ if $item.pt_user_seq eq 3} -->
+     <div class="hdjs">参团记录<span style="font-size:12px;">（自 {$extpintuan.create_time} 开团）</span></div>
+    <!--{/if }-->
+    <!--{ if $item.pt_user_seq gt 2} -->
+  <div class="otherboderhr">
+  <div class="dleft">
+      <!--{if $item.follow_user_head}-->
+         <img src="{$item.follow_user_head}">
+         <!--{else}-->
+         <img src="mobile/themesmobile/mo_paleng_moban/images/extpt_icon_index.png">
+        <!--{/if }-->
+  </div>
+  <div class="dright">团友：<b>{$item.follow_user_nickname}</b><br/>
+  <span>参团时间：{$item.formated_follow_time}</span>
+  </div>
+  </div>
+  <!--{/if }-->
+  <!-- {/foreach} -->    
+  </section>
+  <!--成员部分  PRINCE  120029121-->       
+
+
+
+<!--玩法介绍  P R IN CE 1 2 0 0 2 9 1 2 1-->  
+<div style="width:100%;height:1px; clear:both;"></div>
+<div class="hdjs" id="product">玩法介绍：</div> 
+<div class="s-detail"  >
+      <div class="desc wrap" >
+       <img src="mobile/themesmobile/mo_paleng_moban/images/extpt_footer.png" style="width:100%;height:auto"  />
+      </div>
+</div>
+<br /><br />
+<!--玩法介绍  P R IN CE 1 2 0 0 2 9 1 2 1-->  
+
+<!--{if $extpintuan.need_follow && (!$weixininfo.isfollow ) && $is_wechat_browser   }-->
+            <div class="goumai"><a style="display:block;color: #FFF" onclick="showReg();">立即参团</a> </div>
+          <!--{else}-->
+               <!--{if $right_click}-->
+                  <div class="goumai"><a style="display:block;color: #FFF" onclick="buy_form.submit();">{$right_action}</a> </div>
+               <!--{else}-->
+                  <div class="goumai"><a style="display:block;color: #FFF" href="{$right_url}">{$right_action}</a> </div>
+               <!--{/if}-->
+          <!--{/if}-->
+
+<!--购买表单  PRINCE 120029121-->  
+<form action="extpintuan.php?act=buy" method="post" name="buy_form">
+                          <input type="hidden" name="pt_id" value="{$extpintuan.pt_id}" />
+                          <input type="hidden" name="act_id" value="{$extpintuan.act_id}" />
+                          <input type="hidden" name="level" value="{$extpintuan.level}" />
+                          <input type="hidden" id="number" name="number" value="1" />
+</form>
+<!--购买表单  PRINCE 120029121-->  
+
+
+
+{insert_scripts files='transport.js,utils.js'}
+<!--商品参数 E--> 
+<script type="text/javascript" src="{$ectouch_themes}/js/zepto.min.js"></script> 
+<script type="text/javascript">
+var gmt_end_time = "{$extpintuan.end_time|default:0}";
+{foreach from=$lang.goods_js item=item key=key}
+var {$key} = "{$item}";
+var now_time = {$now_time};
+{/foreach}
+<!-- {literal} -->
+
+onload = function()
+{
+  try
+  {
+    onload_leftTime(now_time);
+  document.getElementById('number').value = 1;//更新数量
+  }
+  catch (e)
+  {}
+}
+<!-- {/literal} -->
+</script>
+
+</div>
+
+    </div>
+  </div>
+</div>
+  <!-- #BeginLibraryItem "/library/page_footer.lbi" -->
+  <!-- #EndLibraryItem -->
+  <!-- #BeginLibraryItem "/library/footer_nav.lbi" -->
+  <!-- #EndLibraryItem -->
+
+</body>
+</html>

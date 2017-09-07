@@ -1,0 +1,69 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+   <!--底部-->
+<div class="w1210 footer clearfix">
+    <div class="footer-top clearfix">
+        <ul>
+            <li>
+                <i class="footer-top-icon01"></i>
+                <p class="p-h2">品质保障</p>
+                <p>品质护航，购物无忧</p>
+            </li>
+            <li>
+                <i class="footer-top-icon02"></i>
+                <p class="p-h2">七天无理由退换</p>
+                <p>为您提供售后无忧保障</p>
+            </li>
+            <li>
+                <i class="footer-top-icon03"></i>
+                <p class="p-h2">特色服务体验</p>
+                <p>为您呈现不一样的服务</p>
+            </li>
+            <li>
+                <i class="footer-top-icon04"></i>
+                <p class="p-h2">帮助中心</p>
+                <p>您的购物指南</p>
+            </li>
+        </ul>
+    </div>
+    <div class="footer-bottom">
+        <ul>
+<!-- {foreach from=$helps item=help_cat name=no} -->
+            <li>
+                <p>{$help_cat.cat_name}</p>
+                <!-- {foreach from=$help_cat.article item=item} -->
+                <a rel="nofollow" href="help.php?id={$item.article_id}" target="_blank">{$item.short_title}</a>
+                <!-- {/foreach} -->
+                
+            </li>
+          
+<!-- {/foreach} -->
+
+          
+          
+
+         <!--   
+
+            <li>
+                <div class="footer-ma">
+                    <p>微信公众号</p>
+                    <img src="../images/weixin.jpg" />
+                </div>
+                <div class="footer-ma">
+                    <p>手机商城</p>
+                    <img src="../images/gongzhonghao.jpg" />
+                </div>
+            </li>
+            -->
+        </ul>
+    </div>
+</div>
+
+<img src="api/cron.php?t=<?php gmtime(); ?>" alt="" style="width:0px;height:0px;display:none;" />
+<!-- footer end  -->
+<script type="text/javascript">
+Ajax.call('api/okgoods.php', '', '', 'GET', 'JSON');
+//预售
+Ajax.call('pre_sale.php?act=check_order', '', '', 'GET', 'JSON');
+</script>
+<script type="text/javascript" src="themes/pc_paleng_moban/js/base.js" ></script>

@@ -1,0 +1,240 @@
+<!DOCTYPE html >
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <title>{$page_title}</title>
+  <meta name="Keywords" content="{$keywords}" />
+  <meta name="Description" content="{$description}" />
+
+<link rel="stylesheet" type="text/css" href="themes/pc_paleng_moban/css/lucky.css" />
+
+<script type="text/javascript" src="themes/pc_paleng_moban/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="themes/pc_paleng_moban/js/jquery-lazyload.js"></script>
+{insert_scripts files='common.js,global.js,compare.js,utils.js'}
+{insert_scripts files='jquery.json.js,transport.js,user.js'}
+
+<script type="text/javascript">
+var available= {$last_lucky_buy.available};
+function changenum(diff) {
+	var num = parseInt(document.getElementById('goods_number').value);
+	var goods_number = num + Number(diff);
+
+	if( goods_number >= 1){
+		if(goods_number>available){
+			document.getElementById('goods_number').value = available;//更新数量
+			document.getElementById('buy_number').value = available;//更新数量
+			alert('对不起，本期最多可购买'+available+'人次');
+		}else{
+			document.getElementById('goods_number').value = goods_number;//更新数量
+			document.getElementById('buy_number').value = goods_number;//更新数量
+		}
+	}
+}
+function onchangenum() {
+	var num = parseInt(document.getElementById('goods_number').value);
+		if(num>available){
+			document.getElementById('goods_number').value = available;//更新数量
+			document.getElementById('buy_number').value = available;//更新数量
+			alert('对不起，本期最多可购买'+available+'人次');
+	}
+	document.getElementById('buy_number').value = num;//更新数量
+}
+function showCode(){
+		document.getElementById('mycode').style.display = 'block';
+		document.getElementById('view_mycode').style.display = 'none';
+}
+
+</script>
+<script>
+/* PRINCE */
+function goBack(){  
+   if(history.length > 1 ){  
+          history.back(-1);  
+    }else{  
+          location.href = 'index.php';
+    }  
+} 
+</script>
+</head>
+<body style="background-color:#FFF;">
+<!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+
+<div class="w1210">
+<div class="lucky_info">
+<!--商品图片 E PRINCE  QQ 120029121-->
+<div class="clist">
+  <ul>
+    <li class="crow level1" >
+      <div  style="height:auto; width:100%; margin-top:0px; margin-left:0px; ">
+      <!-- #BeginLibraryItem "/library/goods_lucky.lbi" --><!-- #EndLibraryItem --> 
+      </div>
+    </li>
+  </ul>  
+</div>
+<!--商品图片 E PRINCE  QQ 120029121-->
+
+<div class="lucky_r">
+  <!--商品参数-->
+  <section class="goodsInfo">
+      <h1>{$lucky_buy.act_name|escape:html}</h1>
+
+    <div class="title">
+      <em style="float:left; color:#999999; font-size:12px; margin-left:5px;">商品价值：¥{$lucky_buy.allprice}</em>      
+      <em style="float:right; color:#999999; font-size:12px; margin-right:5px;">云购单价：¥{$lucky_buy.oneprice}</em>
+    </div>
+
+    <div class="title">
+            梦想还是要有的，万一实现了呢？下单后请及时付款噢！
+    </div>
+  <!--商品参数 E--> 
+  
+  <!--进度条 S-->
+  <div class="w-goods-info">
+       <p class="w-goods-period">期号：{$last_lucky_buy.schedule_id}</p>
+       <div class="w-progressBar">
+            <p class="wrap">
+                    <span class="bar" style="width:{$last_lucky_buy.schedule}%;"><i class="color"></i></span>
+            </p>
+            
+       </div>
+       <ul class="txt">
+                 <li class="txt-l"><p>总需{$last_lucky_buy.total}人次</p></li>
+                 <li class="txt-r"><p>剩余{$last_lucky_buy.available}人次</p></li>
+            </ul>
+   </div>
+  <!--进度条 E--> 
+
+<!--购买数量 S-->
+
+        <div class="fields" style=" display:block;">
+          <ul class="quantity">
+            <div class="items">  <span style="color:#999">选择数量：</span> <span class="ui-number radius5">
+              <input class="num" name="number" id="goods_number" autocomplete="off" value="1" min="1" max="" type="number" onchange="onchangenum()" />
+              </span> </div>
+          </ul>
+        </div>
+  
+<!--购买数量 E-->
+
+<!--当前会员参与情况 S-->
+
+    <div class="user_luck_buy">
+        <!-- {if $codes_buy} -->
+        <div class="title">本期您已参与<em>{$count_buy}</em>人次{if $count_buy lt 101}。 云购码如下：{/if}</div> 
+            <div id="mycode" {if $count_buy gt 100} style="display:none" {/if}>
+            <!-- {foreach from=$codes_buy item=codes_buy }--> 
+            <div  class="mycode" >{$codes_buy.code}</div>          
+            <!--{/foreach}--> 
+            </div>
+            {if $count_buy gt 100}<div class="title" id="view_mycode" onclick="showCode()">点击查看云购码</div> {/if}
+       <!-- {else } -->
+        <div class="title">本期您暂时没有参与</div> 
+       <!-- {/if } -->
+    </div>
+<!---当前会员参与情况 E-->
+
+  <!--{if $lucky_buy.need_follow && (!$weixininfo.isfollow ) && $is_wechat_browser   }-->
+        <dd class="goumai"><a onclick="showReg();">立即云购</a> </dd>
+      <!--{else}-->
+      <dd class="goumai"><a onclick="buyForm.submit();">立即云购</a> </dd>
+      <!--{/if}-->
+  </section>
+</div>
+</div>
+<div>
+<!--横向导航 S-->
+<div class="lb_icon_list">
+			<h3>商品详情</h3>
+      <div class="lucky_txt">
+{$lucky_buy_goods.goods_desc}
+</div>
+            <!-- {if $lucky_buy.act_desc} -->
+			
+				<h3>活动介绍</h3>
+
+			<div class="lucky_txt">
+      {$lucky_buy.act_desc}
+      </div>
+			<!-- {/if } -->
+</div>
+<!--横向导航 E-->
+<!--云购记录 S  PRINCE 120029121--> 
+<div class="hdjs" id=lucky_buy_log>
+      <p >本期参与记录：</p>
+</div>  
+<div id="page" style="right: 0px; left: 0px; display: block; background:#FFFFFF;">
+  <div class="srp list flex-f-row" id="J_ItemList" style="opacity:1;background:#FFFFFF; ">
+    <div class="product flex_in single_item">
+      <div class="pro-inner"></div>
+    </div>
+    <a href="javascript:;" class="get_more"></a> </div>
+   <br /><br /><br />  </div>
+</div>
+
+
+<script type="text/javascript">
+jQuery(function($){
+	$('#J_ItemList').more({'address': 'lucky_buy.php?act=lucky_buy_log&lucky_buy_id={$last_lucky_buy.lucky_buy_id}', 'spinner_code':'<div style="text-align:center; margin:10px;"><img src="images/category/loader.gif" width="12" height="12"  /></div>'})
+	$(window).scroll(function () {
+		if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+			$('.get_more').click();
+		}
+	});
+});
+</script>
+<!--云购记录 E  PRINCE 120029121-->  
+
+
+
+
+
+</div>
+
+
+<form name='buyForm' action="lucky_buy.php" method="POST">
+            <input name="act" type="hidden" value="buy">
+            <input name="act_id" type="hidden" value="{$lucky_buy.act_id}"> 
+            <input name="buy_number" id="buy_number" type="hidden" value="1"> 
+            <input name="available" type="hidden" value="{$last_lucky_buy.available}"> 
+
+</form>
+
+</div>
+
+<!-- <a  href="lucky_buy.php?act=userlist" style="color:#FF0000;">我的云购</a>-->
+
+                
+
+
+   
+
+
+<script type="text/javascript" src="{$ectouch_themes}/js/zepto.min.js"></script> 
+<script type="text/javascript">
+var gmt_end_time = "{$lucky_buy.gmt_end_time|default:0}";
+{foreach from=$lang.goods_js item=item key=key}
+var {$key} = "{$item}";
+var now_time = {$now_time};
+{/foreach}
+<!-- {literal} -->
+
+onload = function()
+{
+  try
+  {
+    onload_leftTime(now_time);
+  }
+  catch (e)
+  {}
+}
+<!-- {/literal} -->
+</script>
+
+
+
+
+<!-- #BeginLibraryItem "/library/page_footer.lbi" -->
+  <!-- #EndLibraryItem -->
+</body>
+</html>

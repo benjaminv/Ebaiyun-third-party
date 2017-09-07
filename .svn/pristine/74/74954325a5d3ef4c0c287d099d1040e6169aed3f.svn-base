@@ -1,0 +1,12 @@
+20161112 20:33:02
+0--- http://localhost/jingdong1/mobile/extpintuan.php
+
+20161112 20:33:05
+0--- http://localhost/jingdong1/mobile/extpintuan.php?act=asynclist&type=0
+
+20161112 20:33:22
+0--- http://localhost/jingdong1/mobile/extpintuan.php?act=list&type=2
+
+20161112 20:33:22
+0--- http://localhost/jingdong1/mobile/extpintuan.php?act=asynclist&type=2
+

@@ -1,0 +1,89 @@
+<!DOCTYPE html >
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <title>{$page_title}</title>
+  <meta name="Keywords" content="{$keywords}" />
+  <meta name="Description" content="{$description}" />
+<link rel="stylesheet" type="text/css" href="themes/pc_paleng_moban/css/goods1.css" />
+<link rel="stylesheet" type="text/css" href="themes/pc_paleng_moban/css/duobao.css" />
+<script type="text/javascript" src="themes/pc_paleng_moban/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="themes/pc_paleng_moban/js/jquery-lazyload.js"></script>
+{insert_scripts files='common.js,global.js,compare.js,utils.js'}
+{insert_scripts files='jquery.json.js,transport.js,user.js'}
+
+
+<script>
+/* PRINCE */
+function goBack(){  
+   if(history.length > 1 ){  
+          history.back(-1);  
+    }else{  
+          location.href = 'index.php';
+    }  
+} 
+</script>
+</head>
+<body>
+<!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+
+
+<!--商品图片 E PRINCE  QQ 120029121-->
+<div class="clist">
+  <ul>
+    <li class="crow level1" >
+      <div  style="height:auto; width:100%; margin-top:0px; margin-left:0px; ">
+      <!-- #BeginLibraryItem "/library/goods_gallery.lbi" --><!-- #EndLibraryItem --> 
+      </div>
+    </li>
+  </ul>  
+</div>
+<!--商品图片 E PRINCE  QQ 120029121-->
+
+<!--图片及活动头 S  PRINCE 120029121-->  
+<div class="clist" style="margin-top:0px;">
+  <ul>
+    
+    <li class="crow level1" style="background-color:#ffffff;">
+      <div style="height:100%; width:100%; font-size:12px; line-height:20px;">
+              <p>{if $lucky_buy.act_name }{$lucky_buy.act_name}{else}{$lucky_buy.goods_name}{/if}</p>
+
+       </div>
+    </li>
+   
+  </ul>
+</div>
+<!--图片及活动头 E  PRINCE-->  
+<div>
+
+
+
+
+<!--商品详情 S  PRINCE-->  
+
+<div class="hdjs" id=product style="margin-top:5px;">
+       <p>商品详情：</p>
+</div> 
+<div class="s-detail" >
+    <div class="desc wrap" >
+    <p  style="margin-top:0px;">{$lucky_buy_goods.goods_desc}</p>
+     </div>
+</div>
+<!--商品详情 E  PRINCE-->  
+<br /><br /><br /><br /><br /><br />
+
+
+
+<div class="footer_nav">
+ <dl style="width:100%;">  
+    <dd class="flow" style="width:100%;"><a style="display:block;" href="javascript:goBack()">返回</a> </dd>
+ </dl>                
+</div>
+
+
+
+
+
+</body>
+</html>

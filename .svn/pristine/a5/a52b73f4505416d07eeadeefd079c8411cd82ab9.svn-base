@@ -1,0 +1,90 @@
+<div class="user_com">
+<!--top-->
+<div class="com_top border_bottm">
+<em>{if $headimgurl neq ''}<img src="{$headimgurl}">{else}<img src="themesmobile/mo_paleng_moban/images/user/user68.jpg">{/if}</em>
+<!---<i>{$rank_name}</i>--->
+<dl>
+<dt><a href="user.php?act=profile" class="set">设置</a><a href="user.php?act=message_list" class="msg">消息</a></dt>
+<dd><span>{$info.username}</span>
+<div class="txt">佰云币：{$info.surplus}<br>积分：{$info.integral}</div>
+</dd>
+</dl>
+<!--
+<ul>
+<li class="bain"><a href="user.php?act=order_list" ><span>{$order_count.all}</span>我的订单</a></li>
+<li class="bain"><a href="user.php?act=collection_list"><span>{$collect_count}</span>我的收藏</a></li>
+<li style=" border:0"><a href="user.php?act=my_comment"><span>{$comment_count}</span>我的评价</a></li>
+</ul>
+-->
+</div>
+<!--我的订单-->
+<div class="Order">
+<dl><a href="user.php?act=order_list"><dt><strong>全部订单</strong><span>查看全部订单</span></dt></a></dl>
+<ul>
+<li><a href="user.php?act=order_list&composite_status=100"><em class="ordem2"><i>{$order_count.await_pay}</i></em><span>待付款</span></a></li>
+<li><a href="user.php?act=order_list&composite_status=101"><em class="ordem3"><i>{$order_count.await_ship}</i></em><span>待发货</span></a></li>
+<li><a href="user.php?act=order_list&composite_status=105" ><em class="ordem1"><i>{$order_count.await_receipt}</i></em><span>待收货</span></a></li>
+<li><a href="lucky_buy.php?act=userlist"><em class="ordem4"><i>{$draw_num}</i></em><span>待开奖</span></a></li>
+<li><a href="extpintuan.php?act=userlist"><em class="ordem5"><i>{$pintuan_num}</i></em><span>待成团</span></a></li>
+</ul>
+</div>
+
+
+<!--我的促销-->
+<div class="Cuxiao">
+<ul>
+{if $lucky_buy eq 1}
+<li><a href="lucky_buy.php?act=userlist"><em class="cuem1"></em><span>我的抽奖</span></a></li>
+{/if}
+{if $is_pintuan eq 1}
+<li><a href="extpintuan.php?act=userlist"><em class="cuem2"></em><span>我的拼团</span></a></li>
+{/if}
+<li><a href="user.php?act=collection_list"><em class="cuem3"></em><span>商品关注</span></a></li>
+<li><a href="user.php?act=follow_shop"><em class="cuem4"></em><span>店铺收藏</span></a></li>
+<li><a href="user.php?act=account_manage"><em class="cuem5"></em><span>我的积分</span></a></li>
+<li><a href="user.php?act=back_list"><em class="cuem6"></em><span>退款售后</span></a></li>
+<li><a href="user.php?act=address_list"><em class="cuem7"></em><span>收货地址</span></a></li>
+<li><a href="article_cat.php?id=3"><em class="cuem8"></em><span>帮助中心</span></a></li>
+
+
+</ul>
+</div>
+<!--
+<a href="user.php?act=my_comment"><em class="Icon1"></em><dl class="border_bottm"><dt>评价/晒单</dt></dl></a>
+-->
+
+</div>
+
+
+<!--首页精品推荐动态加载-->
+ <div class="floor_body2" >
+   <!--  <h2>————&nbsp;{$lang.best_goods}&nbsp;————</h2> -->
+    <div class="in_title"><img src="/mobile/themesmobile/mo_paleng_moban/images/t3.jpg"></div>
+    <div id="hehe">
+
+    </div>
+    
+    <div id="J_ItemList">
+      <ul class="product single_item info">
+      </ul>
+      <a href="javascript:;" class="get_more"> </a> 
+      </div>
+  </div>
+<!--首页精品推荐动态加载end-->
+<!-- #BeginLibraryItem "/library/footer_nav.lbi" --> <!-- #EndLibraryItem --> 
+<!---返回顶部-->
+<script type="text/javascript" src="themesmobile/mo_paleng_moban/js/jquery.js"></script>
+{insert_scripts files='jquery.json.js,transport.js'}
+<script type="text/javascript" src="themesmobile/mo_paleng_moban/js/touchslider.dev.js"></script>
+<script type="text/javascript" src="themesmobile/mo_paleng_moban/js/jquery.more.js"></script>
+{insert_scripts files='common.js'}
+<script type="text/javascript">
+var url = 'index_bestgoods.php?act=ajax';
+var leixing="index55";
+if(sessionStorage[leixing]){  
+	 $('#hehe').html(sessionStorage[leixing]);      
+          }
+$(function(){
+	$('#J_ItemList').more({'address': url,'leixing':leixing});
+});
+</script> 

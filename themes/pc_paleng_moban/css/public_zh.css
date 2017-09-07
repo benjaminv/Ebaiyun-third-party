@@ -1,0 +1,333 @@
+/***********我的佰云币************/
+.baiyunbi {
+  width: 980px;
+  overflow: hidden;
+  padding: 0 20px;
+  box-sizing: border-box;
+  float: right;
+  background: #fff;
+}
+.baiyunbi h4 {
+  font-size: 14px;
+  color: #333;
+  line-height: 48px;
+}
+.mybyb { /*****账户余额、佰云币余额******/
+  width: 100%;
+  height: 150px;
+}
+.mybyb div {
+  width: 100%;
+  height: 100px;
+  border: 1px solid #F6F6F6;
+  box-sizing: border-box;
+}
+.mybyb div p {
+  font-size: 12px;
+  color: #999;
+  text-indent: 20px;
+  margin-top: 18px;
+}
+.mybyb div span {
+  font-size: 18px;
+  color: #00843E;
+  margin-top: 18px;
+  margin-left: 220px;
+  display: block;
+}
+.byb_detail,
+#account_detail { /*******明细公共样式********/
+  width: 100%;
+  overflow: hidden;
+}
+.byb_detail table,
+#account_detail table {
+  width: 100%;
+  overflow: hidden;
+  margin-bottom: 40px;
+}
+.byb_detail th,
+#account_detail th {
+  background: #F6F6F6;
+  height: 30px;
+  line-height: 30px;
+  color: #999;
+  width: 30%;
+}
+.byb_detail td,
+#account_detail td {
+  height: 60px;
+  border-bottom: 1px solid #F6F6F6;
+  line-height: 60px;
+  text-align: center;
+}
+.byb_detail td p,
+#account_detail td p {
+  color: #333;
+}
+.byb_detail td .earning,
+#account_detail td .earning {
+  color: #009646;
+}
+.byb_detail td .expenditure,
+#account_detail td .expenditure {
+  color: #F18E00;
+}
+.byb_detail h6,
+#account_detail h6 {
+  width: 100%;
+  height: 60px;
+  line-height: 60px;
+  color: #333333;
+  font-size: 14px;
+  text-align: right;
+  border: 1px solid #F6F6F6;
+  box-sizing: border-box;
+}
+/***********我的积分***********/
+.integral {
+  width: 980px;
+  overflow: hidden;
+  padding: 0 20px;
+  box-sizing: border-box;
+  float: right;
+  background: #fff;
+}
+.integral h4 {
+  font-size: 14px;
+  color: #333;
+  line-height: 48px;
+}
+.integral .myintegral {
+  width: 100%;
+  height: 180px;
+}
+.integral .myintegral table {
+  width: 100%;
+  height: 130px;
+  border: 1px solid #F6F6F6;
+  box-sizing: border-box;
+}
+.integral .myintegral table th {
+  height: 30px;
+  line-height: 30px;
+  background: #F6F6F6;
+  color: #999;
+  width: 50%;
+}
+.integral .myintegral table td {
+  height: 100px;
+  text-align: center;
+}
+.integral .myintegral table td span {
+  color: #009646;
+  line-height: 100px;
+  font-size: 18px;
+}
+.integral .myintegral table td a {
+  display: block;
+  width: 200px;
+  height: 42px;
+  border: 1px solid #00843E;
+  background: #DAECE3;
+  margin: 28px auto 0;
+  color: #009646;
+  line-height: 42px;
+  font-size: 18px;
+}
+/***********账户余额************/
+.account_nav {
+  width: 100%;
+  height: 50px;
+  border-bottom: 1px solid #F6F6F6;
+}
+.account_nav p {
+  font-size: 14px;
+  color: #333;
+  line-height: 48px;
+  float: left;
+  margin-right: 20px;
+  cursor: pointer;
+}
+.account_nav p:hover {
+  color: #009646;
+}
+.account_nav .active {
+  color: #009646;
+}
+.account_func {
+  width: 100%;
+  overflow: hidden;
+}
+.account_func #account_up {
+  width: 100%;
+  overflow: hidden;
+  display: none;
+}
+.account_func #account_up ul {
+  width: 100%;
+  height: 160px;
+  border: 1px solid #F6F6F6;
+  box-sizing: border-box;
+  padding-top: 20px;
+}
+.account_func #account_up ul li {
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+.account_func #account_up ul li p {
+  width: 80px;
+  font-size: 12px;
+  text-align: right;
+  color: #333333;
+  line-height: 24px;
+  float: left;
+}
+.account_func #account_up ul li input {
+  width: 200px;
+  height: 24px;
+  border: 1px solid #ccc;
+  text-indent: 8px;
+  font-size: 14px;
+}
+.account_func #account_up ul li textarea {
+  width: 400px;
+  height: 60px;
+  border: 1px solid #ccc;
+  text-indent: 8px;
+  font-size: 16px;
+}
+.account_func #account_up table {
+  width: 100%;
+  overflow: hidden;
+  margin-bottom: 50px;
+}
+.account_func #account_up th {
+  background: #F6F6F6;
+  height: 30px;
+  line-height: 30px;
+  color: #999;
+  width: 30%;
+}
+.account_func #account_up td {
+  height: 60px;
+  border-bottom: 1px solid #F6F6F6;
+  line-height: 60px;
+  text-align: center;
+}
+.account_func #account_up td input {
+  margin-right: 10px;
+}
+.account_func #account_up td p {
+  color: #333;
+}
+.account_func #account_up td .earning {
+  color: #009646;
+}
+.account_func #account_up td .expenditure {
+  color: #F18E00;
+}
+.account_func #account_up .account_btn {
+  width: 240px;
+  height: 30px;
+  margin: 0 auto;
+}
+.account_func #account_up .account_btn input {
+  width: 98px;
+  height: 30px;
+  margin: 0 10px;
+  float: left;
+  cursor: pointer;
+  border: 1px solid #CCCCCC;
+  color: #494949;
+  background: #FFFFFF;
+  font-size: 14px;
+}
+.account_func #account_up .account_btn input:first-child {
+  background: #DAECE3;
+  border: 1px solid #009646;
+  color: #00843E;
+}
+.account_func #account_detail {
+  display: none;
+}
+.account_func #account_record {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  display: none;
+}
+.account_func #account_record table {
+  width: 100%;
+  overflow: hidden;
+  margin-bottom: 40px;
+}
+.account_func #account_record tr {
+  display: flex;
+}
+.account_func #account_record th {
+  flex: 1;
+  background: #F6F6F6;
+  height: 30px;
+  line-height: 30px;
+  color: #999;
+}
+.account_func #account_record td {
+  flex: 1;
+  height: 60px;
+  border-bottom: 1px solid #F6F6F6;
+  line-height: 60px;
+  text-align: center;
+}
+.account_func #account_record td p {
+  color: #333;
+}
+.account_func #account_record td .earning {
+  color: #009646;
+}
+.account_func #account_record td .expenditure {
+  color: #F18E00;
+}
+.account_func #account_record h6 {
+  width: 100%;
+  height: 60px;
+  line-height: 60px;
+  color: #333333;
+  font-size: 14px;
+  text-align: right;
+  border: 1px solid #F6F6F6;
+  box-sizing: border-box;
+}
+.account_func #account_record .fenye {
+  width: 580px;
+  height: 30px;
+  position: absolute;
+  bottom: 20px;
+  right: 0;
+}
+.account_func #account_record .fenye p {
+  font-size: 12px;
+  color: #333333;
+  line-height: 30px;
+}
+.account_func #account_record .fenye input {
+  width: 28px;
+  height: 18px;
+  border: 1px solid #CCCCCC;
+  margin: 0 8px;
+  text-align: center;
+}
+.account_func #account_record .fenye a {
+  color: #333333;
+}
+.account_func #account_record .fenye button {
+  width: 40px;
+  height: 30px;
+  background: #009646;
+  border: none;
+  color: #fff;
+}
+.account_func .account_show {
+  display: block !important;
+}
+/*# sourceMappingURL=public_zh.css.map */

@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>免费抽奖积分总动员 - ec抽奖网</title>
+<!-- TemplateEndEditable --><!-- TemplateBeginEditable name="head" --><!-- TemplateEndEditable -->
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
+{* 包含脚本文件 *}
+{insert_scripts files='common.js'}
+<style type="text/css">
+<!--
+.fx img{margin:15px 4px 10px 7px;border:0}
+.fx{border:1px solid #DCD0D2;background:#FBF6F7;clear:both;padding:10px 18px 8px 18px;margin-bottom:8px; text-align:left}
+.email_list{border:1px solid #D5A7C6;width:680px;margin:0px auto;padding:0}
+.rig_iframe{ width:677px;*width:100%;_width:100%;height:auto}
+.fx10{margin:20px 0 0 13px;letter-spacing:10px;}
+.fx10 img{vertical-align:middle;margin-right:15px}
+.ad_g{ float:left; width:300px; height:250px; background:#FF9900}
+.ad_blank{ float:left; width:300px; height:250px}
+-->
+</style>
+<script language="javascript" type="text/javascript">
+var unload_alert = true, is_login='1',  share_url='{$weburl}<!-- {if $userid} -->&uid={$userid}<!-- {/if} -->' ,share_title = '免费抽奖积分总动员 - ec抽奖网', share_content = '抽奖免费，领奖免运费。轻松获取更多中奖机会！ - ec抽奖网 ', if_h;
+
+function copy2border(url)
+{
+ try{
+		window.clipboardData.setData('Text',url);
+		alert('复制成功！')
+	}catch(e)
+	{
+		alert('您的浏览器FIREFOX不支持复制，请手动选择复制！');
+	}
+}
+</script>
+</head>
+<body>
+<div id="container">
+<!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+<div class="block box">
+<div id="ur_here">
+<!-- #BeginLibraryItem "/library/ur_here.lbi" --><!-- #EndLibraryItem -->
+</div>
+</div>
+<div>
+<div style="width: 946px; height: auto; margin: auto;">
+<div style="width: 946px; margin: 0pt auto;">
+<div id="iframeHeight">
+<div style="width:946px;margin:0px auto;font-size:12px;color:#515151">
+ <div style="text-align:left"> <img src="images/wish/yqfriend.gif" /></div>
+  <div class="fx">
+  <font style="letter-spacing:1px;font-weight:bold">ec抽奖网</font> 为您准备了多种邀请方式，几步轻松点击，就可以把您圈子里的好友统统邀请过来：<br />
+  <a href="javascript:;" onclick="window.open('http://v.t.sina.com.cn/share/share.php?title=' + encodeURIComponent(share_content)+'&url='+encodeURIComponent(share_url)+'&appkey=1493335026&pic=http%3A%2F%2Fkooideas.com%2Fthemes%2Fkooidea%2Fimages%2Flogoa.jpg','','width=700, height=580,  toolbar=no, menubar=no, scrollbars=no, location=yes, resizable=no, status=no');"><img src="images/wish/fx_sina.jpg" border="0"/></a><a href="javascript:;" onclick="window.open('http://www.kaixin001.com/repaste/share.php?rtitle='+encodeURIComponent(share_title)+'&rurl='+encodeURIComponent(share_url)+'&rcontent=' + encodeURIComponent(share_content + '注册链接: ' + share_url))"><img src="images/wish/fx_kxw.jpg" border="0"/></a><a href="javascript:;" onclick="window.open('http://share.renren.com/share/buttonshare.do?title=&link='+encodeURIComponent(share_url)+'&content=')"><img src="images/wish/fx_rrw.jpg" border="0"/></a><a href="javascript:;" onclick="window.open('http://www.douban.com/recommend/?url='+encodeURIComponent(share_url)+'&title='+encodeURIComponent(share_title) + '&comment=' + encodeURIComponent(share_content))"><img src="images/wish/fx_db.jpg" border="0"/></a><a href="javascript:;" onclick="window.open('http://shuqian.qq.com/post?from=3&title='+encodeURIComponent(share_title)+'&uri='+encodeURIComponent(share_url)+'&jumpback=2&noui=1')"><img src="images/wish/fx_qq.jpg" border="0"/></a>
+  <br />
+<!-- {if $userid} -->
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="120"><a onclick="return need_login()"><img src="images/wish/fx_link.jpg" border="0"/></a></td>
+      <td align="left"><span style="color:#D80A90;">（温馨提示：点击发送连接按扭,系统会自动生成 邀请朋友注册连接,点击复制发送给好友！）</span></td>
+    </tr>
+  </table>
+<!-- {/if} -->
+<script language="javascript">
+
+function need_login(){
+	chk_login ="123";
+	
+	if(chk_login){
+		document.getElementById('login_link').style.display='';
+	} 
+	else {
+		alert("请先登录ec抽奖网!");
+		window.location="user.php?act=register";
+	}
+}
+</script>
+</div>
+<div class="fx" style="display:none;" id="login_link">
+    点击&ldquo;<span style="color:#D80A90;">复制地址</span>&rdquo;，将分享链接，通过QQ,MSN等聊天工具发给朋友，或者在论坛发个帖子，将下面的链接放在帖子里，分享这个活动．<br />
+	<span>注册地址：<input type="text" style="border:#c3c3c3 solid 1px;color:#787878; width:578px; vertical-align:middle" value="{$weburl}<!-- {if $userid} -->&uid={$userid}<!-- {/if} -->" />
+	<input type="image" name="image" src="images/wish/fzdz.gif" style="vertical-align:middle" onclick="copy2border('{$weburl}<!-- {if $userid} -->&uid={$userid}<!-- {/if} --> 我最近喜欢上的购物网，推荐你也看看，折扣和设计都不错');"/></span>
+</div>
+
+  <div class="fx"><font style="font-size:14px; text-align:left; font-weight:bold; padding-bottom:20px">分享规划</font><br />
+  <p style="line-height:32px;padding:0;margin:0 ;">邀请朋友成功注册即可获 <font color="#D80A90">5</font> 积分<font color="#D80A90">（每ID邀请前50位好友可算分）</font><br />
+    分享所购商品或参与点评，<span style="color:#D80A90"><a href="article.php?id=11" style="color:#D80A90" target="_blank">可获多重积分</a> </span><br />
+    积分可换领丰富礼品和代金券，邀请越多，奖励越多！ <a href="exchange.php" style="color:#D80A90" target="_blank">此查看积分礼品</a></p>
+  </div>
+<DIV class=fx style="font-size:12px"><font style="font-size:14px; text-align:left; font-weight:bold; padding-bottom:20px">关注ec抽奖网</font><br />
+  <P 
+style="padding:0;MARGIN: 0px; LINE-HEIGHT: 20px;">
+以下是 
+<font style="letter-spacing:1px;font-weight:bold">ec抽奖网</font> 的各个外站微博，邀请朋友同时也可以加入我们的圈子，一同分享购物喜悦！</P>
+<P 
+style="PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; LINE-HEIGHT: 10px; PADDING-TOP: 0px"><IMG 
+src="images/wish/sina.gif" width="28" height="28" style="vertical-align:middle">&nbsp;ec抽奖网的新浪微博&nbsp;<A 
+href="http://t.sina.com.cn/zengzitu" target="_blank" style="color:#d80a90;margin-right:2px">关注<FONT 
+style="COLOR: #c9208e; MARGIN-RIGHT: 6px"></FONT></A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<IMG 
+src="images/wish/so.gif" width="28" height="28" style="vertical-align:middle">&nbsp;ec抽奖网的搜狐微博&nbsp;<A 
+href="http://t.sohu.com/zengzitu" target="_blank" style="color:#d80a90;margin-right:2px">关注</A> </P>
+<P 
+style="PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; LINE-HEIGHT: 10px; PADDING-TOP: 0px"><IMG 
+src="images/wish/wy163.gif" width="28" height="28" style="vertical-align:middle">&nbsp;ec抽奖网的网易微博&nbsp;<A 
+href="http://t.163.com/zengzitu" target="_blank" style="color:#d80a90;margin-right:2px">关注</FONT><FONT 
+style="COLOR: #c9208e; MARGIN-RIGHT: 6px"></FONT></A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<IMG 
+src="images/wish/txqq.gif" width="28" height="28" style="vertical-align:middle">&nbsp;ec抽奖网的腾讯微博&nbsp;<A 
+href="http://t.qq.com/zengzitu" target="_blank" style="color:#d80a90;margin-right:2px">关注</FONT></A></P>
+</DIV>
+</div>
+<div style="height:10px"></div>
+          </div>
+        </div>
+      </div>
+</div>
+<div class="blank"></div>
+<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+</div>
+</body>
+</html>

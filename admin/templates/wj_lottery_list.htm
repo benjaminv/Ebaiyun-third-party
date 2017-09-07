@@ -1,0 +1,111 @@
+﻿<!-- $Id: wj_lottery_list.htm 14216 2008-03-10 02:27:21Z testyang $ -->
+
+{if $full_page}
+{include file="pageheader.htm"}
+{insert_scripts files="../js/utils.js,listtable.js"}
+<div class="form-div">
+  <form action="javascript:searchGoods()" name="searchForm">
+    <img src="images/icon_search.gif" width="26" height="22" border="0" alt="SEARCH" />
+    商品名称 <input type="text" name="keyword" size="30" />
+    <input type="submit" value="{$lang.button_search}" class="button" />
+  </form>
+<div style="float:right">
+ <a href="../lottery.php" target="_blank">抽奖页面</a>
+</div>  
+</div>
+
+
+<form method="post" action="wj_lottery.php?act=batch_drop" name="listForm" onsubmit="return confirm(batch_drop_confirm);">
+<!-- start wj_lottery list -->
+<div class="list-div" id="listDiv">
+{/if}
+
+  <table cellpadding="3" cellspacing="1">
+    <tr>
+      <th>
+        <input onclick='listTable.selectAll(this, "checkboxes")' type="checkbox" />
+        <a href="javascript:listTable.sort('id'); ">{$lang.record_id}</a>{$sort_id}
+      </th>	  
+      <th><a href="javascript:listTable.sort('goods_name'); ">商品名称</a>{$sort_goods_name}&nbsp;[id]</th>
+	  <th>原价值</th>
+	  <th>消耗金额</th>
+      <!-- <th>开始时间</th> -->
+	  <th>结束时间</th>
+      <!-- <th>组别</th> -->
+	  <th><a href="javascript:listTable.sort('status'); ">状态</a>{$sort_status}</th>
+	  <th>参与人数</th>
+	  <th>送出</th>
+	  <th>剩余</th>
+	  <th>操作</th>
+    </tr>
+
+    {foreach from=$wj_lottery_list item=wj_lottery}
+    <tr>
+      <td><input value="{$wj_lottery.id}" name="checkboxes[]" type="checkbox">{$wj_lottery.id}</td>
+	  <td><a href="goods.php?act=edit&amp;goods_id={$wj_lottery.goods_id}" title="{$wj_lottery.goods_name}">{$wj_lottery.goods_name|truncate:20:"..."}&nbsp;[{$wj_lottery.goods_id}]</a></td>
+	  <td>{$wj_lottery.shop_price}</td>
+      <td>{$wj_lottery.point}</td>
+      <!-- <td>{$wj_lottery.begin}</td> -->
+	  <td>{$wj_lottery.end|times}</td>
+      <!-- <td><a href="wj_lottery_group.php?act=edit&amp;id={$wj_lottery.lg}">{$wj_lottery.lg_name}</a></td> -->
+	  <td><!--{if $wj_lottery.status == 1}--><font color="#0000FF"><!--{/if}-->{$wj_lottery.status_name}<!--{if $wj_lottery.status == 1}--></font><!--{/if}--></td>
+	  <td>{$wj_lottery.total}</td>
+	  <td>{$wj_lottery.outnum}</td>
+	  <td>{$wj_lottery.remain}</td>
+      <td align="center">
+        <a href="wj_lottery_user.php?act=list_lu&amp;id={$wj_lottery.id}" ><img src="images/icon_view.gif" title="查看中奖情况" border="0" height="16" width="16" /></a>
+        <a href="wj_lottery.php?act=edit&amp;id={$wj_lottery.id}" title="{$lang.edit}"><img src="images/icon_edit.gif" border="0" height="16" width="16" /></a>
+        <a href="javascript:;" onclick="listTable.remove({$wj_lottery.id},'{$lang.drop_confirm}')" title="{$lang.remove}"><img src="images/icon_drop.gif" border="0" height="16" width="16" /></a>
+      </td>
+    </tr>
+    {foreachelse}
+    <tr><td class="no-records" colspan="10">{$lang.no_records}</td></tr>
+    {/foreach}
+  </table>
+
+  <table cellpadding="4" cellspacing="0">
+    <tr>
+      <td><input type="submit" name="drop" id="btnSubmit" value="{$lang.drop}" class="button" disabled="true" /></td>
+      <td align="right">{include file="page.htm"}</td>
+    </tr>
+  </table>
+
+{if $full_page}
+</div>
+<!-- end wj_lottery list -->
+</form>
+
+<script type="text/javascript" language="JavaScript">
+<!--
+  listTable.recordCount = {$record_count};
+  listTable.pageCount = {$page_count};
+
+  {foreach from=$filter item=item key=key}
+  listTable.filter.{$key} = '{$item}';
+  {/foreach}
+
+  {literal}
+  onload = function()
+  {
+    document.forms['searchForm'].elements['keyword'].focus();
+
+//    startCheckOrder();
+  }
+
+  /**
+   * 搜索麦麦团购活动
+   */
+  function searchGoods()
+  {
+
+    var keyword = Utils.trim(document.forms['searchForm'].elements['keyword'].value);
+    listTable.filter['keyword'] = keyword;
+    listTable.filter['page'] = 1;
+    listTable.loadList("wj_lottery_list");
+  }
+  {/literal}
+//-->
+</script>
+
+{include file="pagefooter.htm"}
+{/if}

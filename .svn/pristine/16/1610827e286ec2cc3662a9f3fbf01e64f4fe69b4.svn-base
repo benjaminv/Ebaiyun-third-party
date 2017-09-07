@@ -1,0 +1,96 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<?php
+$GLOBALS['smarty']->assign('cat_recommend_type',get_cat_recommend_type($GLOBALS['smarty']->_var['goods_cat']['id']));
+?>
+
+<div class="floor" floor="{$sort_order}" color="{$ext_info.cat_color}">
+		<div class="floor-layout">
+			
+
+			<div class="floor-con">
+				<div class="floor-title" style="background:{$ext_info.cat_color}">
+					<h2>
+						<a href="{$goods_cat.url}" target="_blank">{$goods_cat.name|escape:html}</a>
+					</h2>
+					<ul>
+					<?php
+            				$ii = 0;
+							$GLOBALS['smarty']->assign('child_cat_hot',get_hot_cat_tree($GLOBALS['smarty']->_var['goods_cat']['id'], 3));
+	    					?>
+							<!--{foreach from=$child_cat_hot item=cat name=name1}-->
+							<!--{foreach from=$cat.child item=cat_child name=name}-->
+							<?php
+	        				$ii = $ii + 1;
+							$GLOBALS['smarty']->assign('ii', $ii);
+							?>
+							<!--{if  $ii < 6 }-->
+							<li>
+                            	<a href="{$cat_child.url}" title="{$cat_child.name|escape:html}">
+									{$cat_child.name|escape:html}
+								</a>
+                            </li>
+							<!-- {/if} -->
+							<!--{/foreach}-->
+							<!--{/foreach}-->
+							</ul>
+				</div>
+               
+                <div class="floor-content">
+                	<div class="floor-left" style="border-top: 1px {$ext_info.cat_color} solid;">
+                    	<?php
+						$GLOBALS['smarty']->assign('index_image',get_advlist('首页-分类ID'.$GLOBALS['smarty']->_var['goods_cat']['id'].'-左侧图片', 3));
+	 					?>
+						<!-- {if $index_image} -->
+                        <div id="focus_{$goods_cat.id}" class="floor-banner">
+                        	<ul>
+                            {foreach from=$index_image item=ad name=index_image}
+                            	<li>
+                                	<a href="{$ad.url}" target="_blank"><img src="{$ad.image}" width="240" height="470" /></a>
+                                </li>
+                            {/foreach}
+                            </ul>
+                        </div>
+                        <!-- {else} -->
+                        <div id="focus_{$goods_cat.id}" class="floor-banner">
+                        	<ul>
+                            	<li>
+                                	<a href="javascript:;" target="_self"><img src="themes/pc_paleng_moban/images/default-img.jpg" width="240" height="470" /></a>
+                                </li>
+                            </ul>
+                        </div>
+						<!-- {/if} -->
+          
+						
+                    </div>
+                    <div class="floor-right">
+                    	<!-- 颜色 -->
+							<div class="floor-tabs-panel" style="border-top: 1px {$ext_info.cat_color} solid;">
+								<?php
+		 						$GLOBALS['smarty']->assign('best_goods', get_cat_recommend_goods('best', get_children($GLOBALS['smarty']->_var['goods_cat']['id']), 8));
+								?>
+								<!--{foreach from=$best_goods item=goods name=cat_item_goods}-->
+								<div class="goods" id="li_{$goods.id}" {if $smarty.foreach.cat_item_goods.iteration % 4 == 0}style="width: 234px"{/if}>
+									<div class="wrap">
+									<p class="title">
+											<a target="_blank" href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_style_name}</a>
+										</p>
+										<p class="full">{$goods.brief}</p>
+										<div class="pic">
+										<a target="_blank" href="{$goods.url}" title="{$goods.name|escape:html}">
+											<img src="{$goods.thumb}" alt="{$goods.name|escape:html}" height="150" class="pic_img_{$goods.id}">
+										</a>
+										</div>					
+									</div>
+								</div>
+								<!--{/foreach}-->
+							</div>
+							
+                    </div>
+                </div>
+                <?php
+					$GLOBALS['smarty']->assign('catbrand',get_cat_brands($GLOBALS['smarty']->_var['goods_cat']['id'], 14));
+	    		?>
+              
+			</div>
+		</div>
+</div>

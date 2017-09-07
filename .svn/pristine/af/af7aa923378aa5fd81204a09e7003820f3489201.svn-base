@@ -1,0 +1,187 @@
+<!DOCTYPE html >
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" -->
+<!-- TemplateEndEditable -->
+  <link rel="stylesheet" type="text/css" href="themes/pc_paleng_moban/css/user.css" />
+    <link rel="stylesheet" type="text/css" href="themes/pc_paleng_moban/css/lucky.css" />
+<script type="text/javascript" src="themes/pc_paleng_moban/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="themes/pc_paleng_moban/js/jquery.validate.js"></script>
+<script type="text/javascript" src="themes/pc_paleng_moban/js/messages_zh.js"></script>
+{insert_scripts files='jquery.json.js,transport.js'} 
+{insert_scripts files='common.js,user.js'}
+<script>
+/* PRINCE */
+function goBack(){  
+   if(history.length > 1 ){  
+          history.back(-1);  
+    }else{  
+          location.href = 'index.php';
+    }  
+} 
+</script>
+</head>
+<body>
+<!-- #BeginLibraryItem "/library/page_header_normal.lbi" --><!-- #EndLibraryItem -->
+<div class="w1210 clearfix">
+<!-- #BeginLibraryItem "/library/ur_here.lbi" --><!-- #EndLibraryItem -->
+  <div class="user-left"> 
+  <!-- #BeginLibraryItem "/library/user_menu.lbi" --><!-- #EndLibraryItem --> 
+  </div>
+  <div class="user-right">
+    <div class="box">
+<div class="tabmenu">
+            <ul class="tab">
+              <li class="active"> <a href="#">我的抽奖</a> </li>
+            </ul>
+          </div>
+
+<!--进度条 S-->
+  <div class="w-goods-info">
+        <!-- {if $lucky_buy.lucky_code} -->
+       <p class="w-goods-period" style="font-size:18px; line-height:30px; text-align:center">幸运号码：<em style=" color:#FF0000">{$lucky_buy.lucky_code}</em></p>
+        <!-- {else } -->
+       <p class="w-goods-period" style="font-size:18px; line-height:30px; text-align:center">期号：<em style=" color:#FF0000">{$lucky_buy.schedule_id}</em></p>
+        <!-- {/if } -->
+       <div class="w-progressBar">
+            <p class="wrap">
+                    <span class="bar" style="width:{$lucky_buy.schedule}%;"><i class="color"></i></span>
+            </p>
+            <ul class="txt">
+                 <li class="txt-l"><p>{$lucky_buy.total}人次云购</p></li>
+                 <!-- {if $lucky_buy.lucky_code gt 0} -->
+                 <li class="txt-r"><p>揭晓时间：{$lucky_buy.end_time}</p></li> 
+                 <!-- {else } -->
+                 <li class="txt-r"><p>剩余：{$lucky_buy.available}人次</p></li>
+                 <!-- {/if } -->
+            </ul>
+       </div>
+   </div>
+  <!--进度条 E--> 
+
+
+<!--中奖者信息 S-->
+<!-- {if $lucky_buy.lucky_code} -->
+<section class="s-detail">
+    <div class="user_luck_buy">
+        <div class="title">本期获奖者</div> 
+        <table style="margin-bottom:10px;color:#666; width:100%;">
+          <tr>
+              <td rowspan="2" width="35%" style="text-align:center; "><img src="{$lucky_buy.lucky_user_head}" alt="{$lucky_buy.lucky_user_name}" style="width:50px; height:auto" ></td>
+                <td width="65%"><em style="color:#999">会员昵称：</em>{$lucky_buy.lucky_user_name}</td>
+            </tr>
+          <tr>
+                <td width="65%"><em style="color:#999">参与人次：</em>{$lucky_user_buy_amount}</td>
+            </tr>
+        </table>
+    </div>
+</section>
+<!-- {/if } -->
+<!---中奖者信息 E-->
+
+
+<!--当前会员参与情况 S-->
+<section class="s-detail">
+    <div class="user_luck_buy">
+        <!-- {if $my_codes_buy} -->
+        <div class="title">本期您已参与<em>{$my_count_buy}</em>人次。云购码如下：</div> 
+            <!-- {foreach from=$my_codes_buy item=my_codes }--> 
+            <div class="mycode">{$my_codes.code}</div>          
+            <!--{/foreach}--> 
+       <!-- {else } -->
+        <div class="title">本期您没有参与</div> 
+       <!-- {/if } -->
+    </div>
+</section>
+<!---当前会员参与情况 E-->
+
+
+
+<!--云购记录 S  PRINCE 120029121--> 
+<div class="hdjs" id=lucky_buy_log>
+      <p >本期参与记录：</p>
+</div>  
+<div id="page" style="right: 0px; left: 0px; display: block; background:#FFFFFF;">
+  <div class="srp list flex-f-row" id="J_ItemList" style="opacity:1;background:#FFFFFF; ">
+    <div class="product flex_in single_item">
+      <div class="pro-inner"></div>
+    </div>
+    <a href="javascript:;" class="get_more"></a> </div>
+</div>
+
+
+
+         </div>
+      </div> 
+    </div>
+
+
+  
+  
+
+
+
+<script type="text/javascript" src="mobile/themesmobile/mo_paleng_moban/js/jquery.more.js"></script> 
+<script type="text/javascript">
+jQuery(function($){
+	$('#J_ItemList').more({'address': 'lucky_buy.php?act=lucky_buy_log&lucky_buy_id={$lucky_buy.lucky_buy_id}', 'spinner_code':'<div style="text-align:center; margin:10px;"><img src="themes/pc_paleng_moban/loader.gif" width="12" height="12"  /></div>'})
+	$(window).scroll(function () {
+		if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+			$('.get_more').click();
+		}
+	});
+});
+</script>
+<!--云购记录 E  PRINCE 120029121-->  
+
+
+
+
+
+
+<form name='buyForm' action="lucky_buy.php" method="POST">
+            <input name="act" type="hidden" value="buy">
+            <input name="id" type="hidden" value="{$lucky_buy.act_id}"> 
+            <input name="number" id="buy_number" type="hidden" value="1"> 
+
+</form>
+
+
+
+<script type="text/javascript" src="{$ectouch_themes}/js/zepto.min.js"></script> 
+<script type="text/javascript">
+var gmt_end_time = "{$lucky_buy.gmt_end_time|default:0}";
+{foreach from=$lang.goods_js item=item key=key}
+var {$key} = "{$item}";
+var now_time = {$now_time};
+{/foreach}
+<!-- {literal} -->
+
+onload = function()
+{
+  try
+  {
+    onload_leftTime(now_time);
+  }
+  catch (e)
+  {}
+}
+<!-- {/literal} -->
+</script>
+
+
+  <!-- #BeginLibraryItem "/library/page_footer.lbi" -->
+  <!-- #EndLibraryItem -->
+  <!-- #BeginLibraryItem "/library/footer_nav.lbi" -->
+  <!-- #EndLibraryItem -->
+
+</body>
+</html>

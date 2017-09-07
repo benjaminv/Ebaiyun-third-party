@@ -1,0 +1,231 @@
+20170213 17:59:02
+0--- http://localhost/jingdong1/mobile/lucky_buy.php
+
+20170213 17:59:03
+0--- http://localhost/jingdong1/mobile/lucky_buy.php?act=asynclist&type=
+
+20170213 17:59:17
+0--- http://localhost/jingdong1/mobile/lucky_buy.php?act=view&act_id=8&u=0
+
+20170213 17:59:19
+0--- http://localhost/jingdong1/mobile/lucky_buy.php?act=lucky_buy_log&lucky_buy_id=3
+
+20170213 17:59:26
+0--- http://localhost/jingdong1/mobile/lucky_buy.php
+
+20170213 17:59:36
+3-palenggege-- http://localhost/jingdong1/mobile/lucky_buy.php
+
+20170213 17:59:37
+3-palenggege-- http://localhost/jingdong1/mobile/lucky_buy.php?act=asynclist&type=
+
+20170213 17:59:40
+3-palenggege-- http://localhost/jingdong1/mobile/lucky_buy.php?act=view&act_id=8&u=3
+
+20170213 17:59:41
+3-palenggege-- http://localhost/jingdong1/mobile/lucky_buy.php?act=lucky_buy_log&lucky_buy_id=3
+
+20170213 17:59:50
+3-palenggege-- http://localhost/jingdong1/mobile/lucky_buy.php
+
+20170213 18:03:50
+3-palenggege-- http://localhost/jingdong1/mobile/lucky_buy.php?act=lucky_buy_log&lucky_buy_id=3
+
+20170213 18:03:51
+3-palenggege-- http://localhost/jingdong1/mobile/lucky_buy.php
+
+20170213 18:03:51
+3-palenggege-- http://localhost/jingdong1/mobile/lucky_buy.php?act=asynclist&type=
+
+20170213 18:03:55
+3-palenggege-- http://localhost/jingdong1/mobile/lucky_buy.php?act=view&act_id=10&u=3
+
+20170213 18:03:58
+3-palenggege-- http://localhost/jingdong1/mobile/lucky_buy.php?act=lucky_buy_log&lucky_buy_id=4
+
+20170213 18:03:59
+3-palenggege-- http://localhost/jingdong1/mobile/lucky_buy.php
+
+20170213 18:08:06
+3-palenggege-- http://localhost/jingdong1/mobile/lucky_buy.php?act=userlist
+
+20170213 18:08:06
+3-palenggege-- http://localhost/jingdong1/mobile/lucky_buy.php?act=asyncuserlist
+
+20170213 18:08:10
+3-palenggege-- http://localhost/jingdong1/mobile/lucky_buy.php?act=schedule_view&lucky_buy_id=4
+
+20170213 18:08:10
+3-palenggege-- http://localhost/jingdong1/mobile/lucky_buy.php?act=lucky_buy_log&lucky_buy_id=4
+
+20170213 18:11:32
+3-palenggege-- http://localhost/jingdong1/mobile/lucky_buy.php?act=asyncuserlist
+
+20170213 18:13:04
+3-palenggege-- http://localhost/jingdong1/mobile/lucky_buy.php
+
+20170213 18:13:06
+3-palenggege-- http://localhost/jingdong1/mobile/lucky_buy.php?act=asynclist&type=
+
+20170213 18:13:10
+3-palenggege-- http://localhost/jingdong1/mobile/lucky_buy.php?act=view&act_id=10&u=3
+
+20170213 18:13:16
+3-palenggege-- http://localhost/jingdong1/mobile/lucky_buy.php?act=lucky_buy_log&lucky_buy_id=4
+
+20170213 18:13:19
+3-palenggege-- http://localhost/jingdong1/mobile/lucky_buy.php
+
+20170213 18:15:18
+3-palenggege-- http://localhost/jingdong1/mobile/lucky_buy.php?act=lucky_buy_log&lucky_buy_id=4
+
+20170213 18:17:48
+3-palenggege-- http://localhost/jingdong1/mobile/lucky_buy.php
+
+20170213 18:29:49
+3-palenggege-- http://localhost/jingdong1/mobile/lucky_buy.php?act=lucky_buy_log&lucky_buy_id=4
+
+20170213 18:29:51
+3-palenggege-- http://localhost/jingdong1/mobile/lucky_buy.php
+
+20170213 18:42:19
+3-palenggege-- http://localhost/jingdong1/mobile/lucky_buy.php?act=lucky_buy_log&lucky_buy_id=4
+
+20170213 18:42:20
+3-palenggege-- http://localhost/jingdong1/mobile/lucky_buy.php
+
+20170213 18:42:22
+3-palenggege-- http://localhost/jingdong1/mobile/lucky_buy.php?act=asynclist&type=
+
+20170213 18:42:27
+3-palenggege-- http://localhost/jingdong1/mobile/lucky_buy.php?act=view&act_id=10&u=3
+
+20170213 18:42:33
+3-palenggege-- http://localhost/jingdong1/mobile/lucky_buy.php?act=lucky_buy_log&lucky_buy_id=4
+
+20170213 18:42:34
+3-palenggege-- http://localhost/jingdong1/mobile/lucky_buy.php
+
+20170213 18:43:27
+3-palenggege-- http://localhost/jingdong1/mobile/lucky_buy.php?act=lucky_buy_log&lucky_buy_id=4
+
+20170213 18:43:28
+3-palenggege-- http://localhost/jingdong1/mobile/lucky_buy.php
+
+20170213 18:43:30
+3-palenggege-- http://localhost/jingdong1/mobile/lucky_buy.php?act=asynclist&type=
+
+20170213 18:51:22
+0--- http://localhost/jingdong1/mobile/lucky_buy.php
+
+20170213 18:51:23
+0--- http://localhost/jingdong1/mobile/lucky_buy.php?act=asynclist&type=
+
+20170213 18:51:26
+0--- http://localhost/jingdong1/mobile/lucky_buy.php?act=view&act_id=8&u=0
+
+20170213 18:51:28
+0--- http://localhost/jingdong1/mobile/lucky_buy.php?act=lucky_buy_log&lucky_buy_id=3
+
+20170213 18:51:29
+0--- http://localhost/jingdong1/mobile/lucky_buy.php
+
+20170213 18:51:38
+4-u494NTQU2093-- http://localhost/jingdong1/mobile/lucky_buy.php
+
+20170213 18:51:38
+4-u494NTQU2093-- http://localhost/jingdong1/mobile/lucky_buy.php?act=asynclist&type=
+
+20170213 18:51:42
+4-u494NTQU2093-- http://localhost/jingdong1/mobile/lucky_buy.php?act=view&act_id=10&u=4
+
+20170213 18:51:43
+4-u494NTQU2093-- http://localhost/jingdong1/mobile/lucky_buy.php?act=lucky_buy_log&lucky_buy_id=4
+
+20170213 18:51:45
+4-u494NTQU2093-- http://localhost/jingdong1/mobile/lucky_buy.php
+
+20170213 19:03:16
+4-u494NTQU2093-- http://localhost/jingdong1/mobile/lucky_buy.php?act=lucky_buy_log&lucky_buy_id=4
+
+20170213 19:03:17
+4-u494NTQU2093-- http://localhost/jingdong1/mobile/lucky_buy.php
+
+20170213 19:03:17
+4-u494NTQU2093-- http://localhost/jingdong1/mobile/lucky_buy.php?act=asynclist&type=
+
+20170213 19:04:07
+4-u494NTQU2093-- http://localhost/jingdong1/mobile/extpintuan.php?act=view&act_id=4&u=4
+
+20170213 19:04:10
+4-u494NTQU2093-- http://localhost/jingdong1/mobile/extpintuan.php?act=buy
+
+20170213 19:20:39
+4-u494NTQU2093-- http://localhost/jingdong1/mobile/lucky_buy.php
+
+20170213 19:20:39
+4-u494NTQU2093-- http://localhost/jingdong1/mobile/lucky_buy.php?act=asynclist&type=
+
+20170213 19:20:43
+4-u494NTQU2093-- http://localhost/jingdong1/mobile/lucky_buy.php?act=view&act_id=10&u=4
+
+20170213 19:20:45
+4-u494NTQU2093-- http://localhost/jingdong1/mobile/lucky_buy.php?act=lucky_buy_log&lucky_buy_id=4
+
+20170213 19:20:47
+4-u494NTQU2093-- http://localhost/jingdong1/mobile/lucky_buy.php
+
+20170213 22:20:21
+4-u494NTQU2093-- http://localhost/jingdong1/mobile/extpintuan.php?act=view&act_id=4&u=4
+
+20170213 22:20:28
+4-u494NTQU2093-- http://localhost/jingdong1/mobile/extpintuan.php?act=buy
+
+20170213 22:30:29
+4-u494NTQU2093-- http://localhost/jingdong1/mobile/extpintuan.php?act=buy
+
+20170213 22:32:01
+4-u494NTQU2093-- http://localhost/jingdong1/mobile/extpintuan.php?act=userlist
+
+20170213 22:32:01
+4-u494NTQU2093-- http://localhost/jingdong1/mobile/extpintuan.php?act=asyncuserlist
+
+20170213 22:32:06
+4-u494NTQU2093-- http://localhost/jingdong1/mobile/extpintuan.php?act=pt_view&pt_id=3&level=3
+
+20170213 22:44:38
+4-u494NTQU2093-- http://localhost/jingdong1/mobile/extpintuan.php?act=userlist
+
+20170213 22:44:39
+4-u494NTQU2093-- http://localhost/jingdong1/mobile/extpintuan.php?act=asyncuserlist
+
+20170213 22:44:45
+4-u494NTQU2093-- http://localhost/jingdong1/mobile/extpintuan.php?act=pt_view&pt_id=3&level=3
+
+20170213 22:58:34
+4-u494NTQU2093-- http://localhost/jingdong1/mobile/extpintuan.php?act=userlist
+
+20170213 22:58:34
+4-u494NTQU2093-- http://localhost/jingdong1/mobile/extpintuan.php?act=asyncuserlist
+
+20170213 22:58:36
+4-u494NTQU2093-- http://localhost/jingdong1/mobile/extpintuan.php?act=pt_view&pt_id=3&level=3
+
+20170213 23:06:34
+4-u494NTQU2093-- http://localhost/jingdong1/mobile/extpintuan.php?act=asyncuserlist
+
+20170213 23:06:38
+4-u494NTQU2093-- http://localhost/jingdong1/mobile/extpintuan.php?act=asyncuserlist
+
+20170213 23:07:34
+3-palenggege-- http://localhost/jingdong1/mobile/extpintuan.php?act=userlist
+
+20170213 23:07:36
+3-palenggege-- http://localhost/jingdong1/mobile/extpintuan.php?act=asyncuserlist
+
+20170213 23:07:39
+3-palenggege-- http://localhost/jingdong1/mobile/extpintuan.php?act=pt_view&pt_id=1&level=3
+
+20170213 23:07:46
+3-palenggege-- http://localhost/jingdong1/mobile/extpintuan.php?act=asyncuserlist
+

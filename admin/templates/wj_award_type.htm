@@ -1,0 +1,132 @@
+﻿<!-- $Id: wj_award_type_info.htm 14216 2008-03-10 02:27:21Z testyang $ -->
+{include file="pageheader.htm"}
+{insert_scripts files="validator.js,../js/utils.js"}
+
+
+
+<form method="post" action="wj_award_type.php?act=insert_update" name="theForm" >
+<div class="main-div">
+<table cellspacing="1" cellpadding="3" width="100%">
+
+  <tr>
+    <td class="label">积分设置：</td>
+	<td>
+    登录积分:&nbsp;&nbsp;<input name="point1" type="text" size="20" value="{$point1}" /><br/>
+	广告积分:&nbsp;&nbsp;<input name="point2" type="text" size="20" value="{$point2}" /><br/>
+	评论积分:&nbsp;&nbsp;<input name="point3" type="text" size="20" value="{$point3}" /><br/>
+
+	</td>
+	 
+  </tr>
+
+
+  <tr>
+    <td class="label">&nbsp;</td>
+    <td>
+      <input type="submit" name="submit" value="{$lang.button_submit}" class="button" />
+      <input type="reset" value="{$lang.button_reset}" class="button" />
+    </td>
+  </tr>
+</table>
+</div>
+</form>
+<script language="JavaScript">
+<!--
+{literal}
+
+/**
+ * 搜索商品
+ */
+function searchItem()
+{
+  var filter = new Object;
+  filter.keyword  = document.forms['theForm'].elements['keyword'].value;
+  filter.act_range = 3;
+
+  Ajax.call('wj_award_type.php?is_ajax=1&act=search', filter, searchResponse, 'GET', 'JSON');
+}
+
+function searchResponse(result)
+{
+  if (result.error == '1' && result.message != '')
+  {
+    alert(result.message);
+	return;
+  }
+
+  var sel = document.forms['theForm'].elements['result'];
+
+  sel.length = 0;
+
+  /* 创建 options */
+  var goods = result.content;
+  if (goods)
+  {
+    for (i = 0; i < goods.length; i++)
+    {
+      var opt = document.createElement("OPTION");
+      opt.value = goods[i].id;
+      opt.text  = goods[i].name;
+      sel.options.add(opt);
+    }
+  }
+
+  return;
+}
+function addRange()
+{
+  var selResult = document.getElementById('result');
+  if (selResult.value == 0)
+  {
+    alert(pls_search);
+    return;
+  }
+  var id = selResult.options[selResult.selectedIndex].value;
+  var name = selResult.options[selResult.selectedIndex].text;
+
+  // 检查是否已经存在
+  var exists = false;
+  var eles = document.forms['theForm'].elements;
+  for (var i = 0; i < eles.length; i++)
+  {
+    if (eles[i].type=="checkbox" && eles[i].name.substr(0, 13) == 'act_range_ext')
+    {
+      if (eles[i].value == id)
+      {
+        exists = true;
+        alert(range_exists);
+        break;
+      }
+    }
+  }
+
+  // 创建checkbox
+  if (!exists)
+  {
+    var html = '<input name="act_range_ext[]" type="checkbox" goodsname="'+name+'" value="' + id + '" checked="checked" onclick="hidecb(this);"/>' + name +'<br/>';
+    document.getElementById('range-div').innerHTML += html;
+  }
+
+}
+function hidecb(objd)
+{
+	var obj = document.getElementsByName("act_range_ext[]");
+
+	var i;
+	var html = '';
+	for(i=0;i<obj.length;i++)
+	{
+		if(obj[i].checked == true)
+		{
+			html =html + '<input name="act_range_ext[]" type="checkbox" goodsname="'+obj[i].goodsname+'" value="' + obj[i].value + '" checked="checked" onclick="hidecb(this);"/>' + obj[i].goodsname +'<br/>';
+
+		}
+	}
+	document.getElementById('range-div').innerHTML = html;
+	
+}
+//-->
+{/literal}
+</script>
+
+{include file="pagefooter.htm"}

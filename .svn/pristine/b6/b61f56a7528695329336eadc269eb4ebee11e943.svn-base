@@ -1,0 +1,62 @@
+<!DOCTYPE html >
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <title>{$page_title}</title>
+  <meta name="Keywords" content="{$keywords}" />
+  <meta name="Description" content="{$description}" />
+  <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+  <link rel="stylesheet" type="text/css" href="themesmobile/mo_paleng_moban/css/public.css"/>
+<link rel="stylesheet" type="text/css" href="themesmobile/mo_paleng_moban/css/exshangexin.css" />
+<script type="text/javascript" src="themesmobile/mo_paleng_moban/js/jquery.js"></script>
+<script type="text/javascript" src="themesmobile/mo_paleng_moban/js/TouchSlide.1.1.js"></script>
+<script type="text/javascript" src="themesmobile/mo_paleng_moban/js/jquery.more.js"></script>
+
+</head>
+<body class="body_bj">
+      <!---header-->
+      <div class="tab_nav">
+        <div class="header">
+          <div class="h-left"><a class="sb-back" href="javascript:history.back(-1)" title="返回"></a></div>
+          <div class="h-mid">积分商城</div>
+          <div class="h-right">
+            <aside class="top_bar">
+              <div onClick="show_menu();$('#close_btn').addClass('hid');" id="show_more" ><a href="javascript:;"></a> </div>
+            </aside>
+          </div>
+        </div>
+      </div>
+       	<!-- #BeginLibraryItem "/library/up_menu.lbi" --><!-- #EndLibraryItem --> <!--弹出菜单-->
+<div id="tbh5v0">
+<script type="text/javascript">
+var url = 'exchange.php?act=ajax_list';
+$(function(){
+	$('#J_ItemList').more({
+        'address': url,
+        'data':{'sort':'{$sort}','order':'{$order}'},
+});
+});
+</script> 
+
+
+    <div id="J_ItemList" class="layout_list">
+      <ul class="single_item info">
+      </ul>
+      <a href="javascript:;" class="get_more" style="text-align:center; display:block;"></a> 
+    </div>
+</div>
+
+
+<!-- #BeginLibraryItem "/library/footer_nav.lbi" --><!-- #EndLibraryItem -->
+<!---返回顶部-->
+<script>
+function goTop(){
+	$('html,body').animate({'scrollTop':0},600);
+}
+</script>
+<a href="javascript:goTop();" class="gotop"><img src="themesmobile/mo_paleng_moban/images/topup.png"></a> 
+</div>
+</body>
+
+</html>

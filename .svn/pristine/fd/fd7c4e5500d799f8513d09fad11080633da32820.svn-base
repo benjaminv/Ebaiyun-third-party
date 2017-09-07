@@ -1,0 +1,110 @@
+﻿<!-- $Id: wj_lottery_user_list.htm 14216 2008-03-10 02:27:21Z testyang $ -->
+
+{if $full_page}
+{include file="pageheader.htm"}
+{insert_scripts files="../js/utils.js,listtable.js"}
+<div class="form-div">
+  <form action="javascript:searchGoods()" name="searchForm">
+    <img src="images/icon_search.gif" width="26" height="22" border="0" alt="SEARCH" />
+    商品名称 <input type="text" name="keyword" size="30" />
+    <input type="submit" value="{$lang.button_search}" class="button" />
+  </form>
+</div>
+
+<form method="post" action="wj_lottery_user.php?act=batch_drop" name="listForm" onsubmit="return confirm(batch_drop_confirm);">
+<!-- start wj_lottery_user list -->
+<div class="list-div" id="listDiv">
+{/if}
+
+  <table cellpadding="3" cellspacing="1">
+    <tr>
+      <th>
+        <input onclick='listTable.selectAll(this, "checkboxes")' type="checkbox" />
+        <a href="javascript:listTable.sort('id'); ">{$lang.record_id}</a>{$sort_id}
+      </th>	  
+      <th><a href="javascript:listTable.sort('goods_name'); ">商品名称</a>{$sort_goods_name}&nbsp;[id]</th>
+	  <!-- <th>原价值</th> -->
+	  <th>消耗金额(元)</th>
+      <!-- <th>中奖概率</th>
+	  <th>中奖号码</th> -->
+      <th>用户</th>
+	  <th><a href="javascript:listTable.sort('status'); ">中奖状态</a>{$sort_status}</th>
+	  <!-- <th><a href="javascript:listTable.sort('applystatus'); ">申请状态</a>{$sort_applystatus}</th> -->
+      <!-- <th>订单</th> -->
+	  <th>备注</th>
+	  <th>操作</th>
+    </tr>
+
+    {foreach from=$wj_lottery_user_list item=wj_lottery_user}
+    <tr>
+      <td><input value="{$wj_lottery_user.id}" name="checkboxes[]" type="checkbox">{$wj_lottery_user.id}</td>
+	  <td><a href="goods.php?act=edit&amp;goods_id={$wj_lottery_user.goods_id}" title="{$wj_lottery_user.goods_name}">{$wj_lottery_user.goods_name|truncate:20:"..."}&nbsp;[{$wj_lottery_user.goods_id}]</a></td>
+	  <!-- <td>{$wj_lottery_user.shop_price}</td> -->
+      <td>{$wj_lottery_user.point}</td>
+      <!-- <td>{$wj_lottery_user.pro}&nbsp;&nbsp;({$wj_lottery_user.proper}%)</td>
+	  <td>{$wj_lottery_user.winnum}</td> -->
+	  <td>{$wj_lottery_user.user_name}</td>
+	  <td><!--{if $wj_lottery_user.status == 0}--><font color="#996633"><!--{/if}-->{$wj_lottery_user.status_name}<!--{if $wj_lottery_user.status == 0}--></font><!--{/if}--></td>
+	  <!-- <td>{if $wj_lottery_user.applystatus }已申请{else}<font color="#996633">未申请</font>{/if}</td> -->
+      <!-- <td align="center">{if $wj_lottery_user.order_id}<a href="order.php?act=info&order_id={$wj_lottery_user.order_id}">{$wj_lottery_user.order_id}</a>{/if}</td> -->
+	  <td>{$wj_lottery_user.remark|truncate:20:"..."}</td>
+      <td align="center">
+      	{if $wj_lottery_user.status == 1}
+      	{else}
+	  	<a href="wj_lottery.php?act=edit&amp;id={$wj_lottery_user.lid}" ><img src="images/icon_view.gif" title="查看抽奖" border="0" height="16" width="16" /></a>
+        <a href="wj_lottery_user.php?act=set_lottery&amp;lid={$wj_lottery_user.lid}&amp;user_id={$wj_lottery_user.user_id}" title="{$lang.edit}"><img src="images/icon_edit.gif" border="0" title="设置中奖" height="16" width="16" /></a>
+        <!-- <a href="javascript:;" onclick="listTable.remove({$wj_lottery_user.id},'{$lang.drop_confirm}')" title="{$lang.remove}"><img src="images/icon_drop.gif" border="0" height="16" width="16" /></a> -->
+      	{/if}
+      </td>
+    </tr>
+    {foreachelse}
+    <tr><td class="no-records" colspan="10">{$lang.no_records}</td></tr>
+    {/foreach}
+  </table>
+
+  <table cellpadding="4" cellspacing="0">
+    <tr>
+      <td><input type="submit" name="drop" id="btnSubmit" value="{$lang.drop}" class="button" disabled="true" /></td>
+      <td align="right">{include file="page.htm"}</td>
+    </tr>
+  </table>
+
+{if $full_page}
+</div>
+<!-- end wj_lottery_user list -->
+</form>
+
+<script type="text/javascript" language="JavaScript">
+<!--
+  listTable.recordCount = {$record_count};
+  listTable.pageCount = {$page_count};
+
+  {foreach from=$filter item=item key=key}
+  listTable.filter.{$key} = '{$item}';
+  {/foreach}
+
+  {literal}
+  onload = function()
+  {
+    document.forms['searchForm'].elements['keyword'].focus();
+
+//    startCheckOrder();
+  }
+
+  /**
+   * 搜索麦麦团购活动
+   */
+  function searchGoods()
+  {
+
+    var keyword = Utils.trim(document.forms['searchForm'].elements['keyword'].value);
+    listTable.filter['keyword'] = keyword;
+    listTable.filter['page'] = 1;
+    listTable.loadList("wj_lottery_user_list");
+  }
+  {/literal}
+//-->
+</script>
+
+{include file="pagefooter.htm"}
+{/if}

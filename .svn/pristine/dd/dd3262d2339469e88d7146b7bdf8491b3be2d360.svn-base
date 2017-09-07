@@ -1,0 +1,76 @@
+﻿<!-- $Id: wj_lottery_group_list.htm 14216 2008-03-10 02:27:21Z testyang $ -->
+
+{if $full_page}
+{include file="pageheader.htm"}
+{insert_scripts files="../js/utils.js,listtable.js"}
+
+
+<form method="post" action="wj_lottery_group.php?act=batch_drop" name="listForm" onsubmit="return confirm(batch_drop_confirm);">
+<!-- start wj_lottery_group list -->
+<div class="list-div" id="listDiv">
+{/if}
+
+  <table cellpadding="3" cellspacing="1">
+    <tr>
+      <th>
+        <input onclick='listTable.selectAll(this, "checkboxes")' type="checkbox" />
+        <a href="javascript:listTable.sort('id'); ">{$lang.record_id}</a>{$sort_id}
+      </th>	  
+      <th><a href="javascript:listTable.sort('goods_name'); ">组别名称</a>{$sort_goods_name}</th>
+	  <th>概率</th>
+	  <th>设置的抽奖商品数量</th>
+	  <th>操作</th>
+    </tr>
+
+    {foreach from=$wj_lottery_group_list item=wj_lottery_group}
+    <tr>
+      <td><input value="{$wj_lottery_group.id}" name="checkboxes[]" type="checkbox">{$wj_lottery_group.id}</td>
+	  <td>{$wj_lottery_group.lg_name|escape:html}</td>
+	  <td>1/{$wj_lottery_group.lg_pro}&nbsp;&nbsp;({$wj_lottery_group.pro}%)</td>
+      <td>{$wj_lottery_group.num}</td>
+      <td align="center">
+        <a href="wj_lottery.php?act=list_lg&amp;id={$wj_lottery_group.id}" ><img src="images/icon_view.gif" title="查看商品" border="0" height="16" width="16" /></a>
+        <a href="wj_lottery_group.php?act=edit&amp;id={$wj_lottery_group.id}" title="{$lang.edit}"><img src="images/icon_edit.gif" border="0" height="16" width="16" /></a>
+        <a href="javascript:;" onclick="listTable.remove({$wj_lottery_group.id},'{$lang.drop_confirm}')" title="{$lang.remove}"><img src="images/icon_drop.gif" border="0" height="16" width="16" /></a>
+      </td>
+    </tr>
+    {foreachelse}
+    <tr><td class="no-records" colspan="10">{$lang.no_records}</td></tr>
+    {/foreach}
+  </table>
+
+  <table cellpadding="4" cellspacing="0">
+    <tr>
+      <td><input type="submit" name="drop" id="btnSubmit" value="{$lang.drop}" class="button" disabled="true" /></td>
+      <td align="right">{include file="page.htm"}</td>
+    </tr>
+  </table>
+
+{if $full_page}
+</div>
+<!-- end wj_lottery_group list -->
+</form>
+
+<script type="text/javascript" language="JavaScript">
+<!--
+  listTable.recordCount = {$record_count};
+  listTable.pageCount = {$page_count};
+
+  {foreach from=$filter item=item key=key}
+  listTable.filter.{$key} = '{$item}';
+  {/foreach}
+
+  {literal}
+  onload = function()
+  {
+    document.forms['searchForm'].elements['keyword'].focus();
+
+//    startCheckOrder();
+  }
+
+  {/literal}
+//-->
+</script>
+
+{include file="pagefooter.htm"}
+{/if}

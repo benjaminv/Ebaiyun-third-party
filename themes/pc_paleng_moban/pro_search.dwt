@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" -->
+<!-- TemplateEndEditable -->
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link rel="stylesheet" type="text/css" href="themes/pc_paleng_moban/css/pro_search.css"/>
+<script type="text/javascript" src="themes/pc_paleng_moban/js/jquery-1.9.1.min.js" ></script>
+<script type="text/javascript" src="themes/pc_paleng_moban/js/jquery-lazyload.js" ></script>
+{insert_scripts files='jquery.json.js,transport.js'}
+{insert_scripts files='utils.js,common.js'}
+</head>
+<body style="background: #f5f5f5">
+<!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+<!-- TemplateBeginEditable name="团购通栏广告" -->
+<!-- #BeginLibraryItem "/library/ad_position.lbi" --> <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+<div class="margin-w1210 clearfix">
+<img src="/images/20170609/pic30.png" class="group_img">
+      <!--分类筛选 star-->
+     
+      <!--分类筛选 end--> 
+      <!--列表排序 star-->
+      
+      <!--列表排序 end-->
+
+<div class="group_list">
+    <ul>
+
+      <li><a href="#"><img src="/images/20170609/pic29.png"></a></li>
+
+
+                
+
+
+
+
+
+<!--{foreach from=$goods_list item=goods name=name key=key}--> 
+                 <!--{if $goods.goods_name neq ''}-->
+      <li>
+        <a href="{$goods.url}">
+          <img data-original="{$goods.goods_thumb}" src="{$goods.goods_thumb}" alt="{$goods.goods_name|escape:html}">
+          <p>{$goods.goods_name}</p>
+          <div class="group_buy">
+            <div>
+              <span>{$goods.shop_price}</span>
+              <span>已团{$goods.count1}件</span>
+            </div>
+            <div><a class="btn-doing" title="立即抢购" href="{$goods.url}" target="_blank">去开团</a></div>
+          </div>
+        </a>
+      </li>
+      <!--{/if}-->
+                <!--{/foreach}-->
+    </ul>
+  </div>
+
+
+
+
+
+	<!-- #BeginLibraryItem "/library/pages.lbi" --><!-- #EndLibraryItem --> 
+  <img src="/images/20170609/pic31.png" class="group_img" style="margin-top: 100px;">
+  <div class="group_text">
+    <p>价格说明：</p>
+    <p>秒杀价：参与秒杀活动期间，该商品在秒杀频道的促销价格。</p>
+    <p>划线价：商品展示的划横线价格为参考价，该价格可能是品牌专柜标价、商品吊牌价或由品牌供应商提供的正品零售价（如厂商指导价、建议零售价等）或该商品在平台上曾经展示过的销售价；由于地区、时间的差异性和市场行情波动，品牌专柜标品牌吊牌价等可能会与您购物时展示的不一致，该价格仅供您参考。</p>
+    <p>小贴士：因可能存在系统缓、界面更新导致价格变动异常等不确定性情况出现，如您发现活动商品标价或促销信息有异常，请您立即联系我们，以便我们及时补正</p>
+  </div>
+</div>
+
+<div class="site-footer">
+  <div class="footer-related">
+  	<!-- #BeginLibraryItem "/library/help.lbi" --><!-- #EndLibraryItem --> 
+	<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+  </div>
+</div>
+<script type="text/javascript">
+$("img").lazyload({
+    effect       : "fadeIn",
+	 skip_invisible : true,
+	 failure_limit : 20
+});
+</script> 
+<script>
+$(function(){
+updateEndTime();
+});
+//倒计时函数
+function updateEndTime()
+{
+ var date = new Date();
+    /* 代码修改 By  www.68ecshop.com 促销商品时间精确到时分 Start */
+// var time = date.getTime()+8*60*60*1000;
+    var time = date.getTime();
+    /* 代码修改 By  www.68ecshop.com 促销商品时间精确到时分 End */
+
+    $(".txt").each(function(i){
+ 
+ var endDate =this.getAttribute("endTime"); //结束时间字符串
+
+ //转换为时间日期类型
+ var endDate1 = eval('new Date(' + endDate.replace(/\d+(?=-[^-]+$)/, function (a) { return parseInt(a, 10) - 1; }).match(/\d+/g) + ')');
+
+ var endTime = endDate1.getTime(); //结束时间毫秒数
+ 
+ var lag = (endTime - time) / 1000; //当前时间和结束时间之间的秒数
+  if(lag > 0)
+  {
+   var second = Math.floor(lag % 60);     
+   var minite = Math.floor((lag / 60) % 60);
+   var hour = Math.floor((lag / 3600) % 24);
+   var day = Math.floor((lag / 3600) / 24);
+   $(this).html(day+"天"+hour+"小时"+minite+"分"+second+"秒");
+  }
+  else
+   $(this).html("团购已经结束啦！");
+ });
+ setTimeout("updateEndTime()",1000);
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,291 @@
+<!DOCTYPE html >
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" -->
+<!-- TemplateEndEditable -->
+  <meta name="Keywords" content="{$keywords}" />
+  <meta name="Description" content="{$description}" />
+<link rel="stylesheet" type="text/css" href="themes/pc_paleng_moban/css/{$cat_style}" />
+<link rel="stylesheet" type="text/css" href="themes/pc_paleng_moban/css/extpt_info.css" />
+<script>var jdpts = new Object(); jdpts._st = new Date().getTime();</script>
+<script type="text/javascript" src="themes/pc_paleng_moban/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="themes/pc_paleng_moban/js/jquery-lazyload.js"></script>
+{insert_scripts files='common.js,global.js,compare.js,utils.js'}
+{insert_scripts files='jquery.json.js,transport.js,user.js'}
+<script type="text/javascript">
+// 筛选商品属性
+jQuery(function($) {
+	$(".info").click(function(){
+		$('.goodsBuy .fields').slideToggle("fast");
+	});
+})
+
+
+onload = function(){
+		document.getElementById('goods_number').value = 1;//更新数量
+		document.getElementById('number_single_buy').value = 1;//更新数量
+		document.getElementById('extpintuan_number').value = 1;//更新数量
+
+}
+
+function changenum(diff) {
+	var num = parseInt(document.getElementById('goods_number').value);
+	var goods_number = num + Number(diff);
+	if( goods_number >= 1){
+		document.getElementById('goods_number').value = goods_number;//更新数量
+		document.getElementById('extpintuan_number').value = goods_number;//更新数量
+	}
+}
+</script>
+<script>
+/* 热风科技 */
+function goBack(){  
+   if(history.length > 1 ){  
+          history.back(-1);  
+    }else{  
+          location.href = 'index.php';
+    }  
+} 
+</script>
+<script>
+/* 生成随机价格 */
+var g_Interval = 1;
+var g_Min_price = {$extpintuan.min_price};//下限
+var g_Max_price = {$extpintuan.max_price};//上限
+var choose_number={$extpintuan.choose_number};
+var act_id = {$extpintuan.act_id};
+var level = {$extpintuan.level};
+var g_Timer;
+var running = false;
+function beginRndNum(trigger){
+     document.getElementById('click_a').style.display = 'none';	
+     document.getElementById('click_b').style.display = 'block';	
+
+	if(running){
+		running = false;
+		clearTimeout(g_Timer);	
+		var price=document.getElementById('price').value;
+        Ajax.call('extpintuan.php', 'act=setprice&act_id=' + act_id + '&price=' + price+ '&level=' + level, setPriceResponse, 'GET', 'JSON');
+		document.getElementById('buy_button').style.display = 'block';	
+	}
+	else{
+		running = true;
+		beginTimer();
+		g_Timer = setTimeout(beginRndNum, 2000);
+		
+	}
+}
+
+function setPriceResponse(res){
+}
+function updateRndNum(){
+	var num = (Math.random()*(g_Max_price-g_Min_price)+g_Min_price).toFixed(2);
+	var newnum=(Array(8).join(0) + num).slice(-8);
+	//$('#chouqujiage_b').html('立即开团'+"&nbsp;&gt;");
+	$('#ResultPrice_b').html('¥'+num+'元');
+	document.getElementById('price').value = num;
+}
+
+function beginTimer(){
+	g_Timer = setTimeout(beat, g_Interval);
+}
+
+function beat() {
+	g_Timer = setTimeout(beat, g_Interval);
+	updateRndNum();
+
+}
+</script>
+</head>
+<body>
+{insert name='add_url_uid'}
+<!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+
+<div class="w1210">
+
+<div class="w">
+  <div class="breadcrumb clearfix"><a href="/" class="index">首页</a> <span class="crumbs-arrow">&gt;</span> 
+  <div class="crumbs-nav"><a href="extpintuan.php">拼团专区</a></div> 
+  <span class="crumbs-arrow">&gt;</span> <span class="last">{$extpintuan.act_name|escape:html}</span>
+  </div>
+</div>
+
+<div class="expt-box">
+
+<div class="clist">
+  <ul>
+    <li class="crow level1" >
+      <div  style="height:auto; width:100%; margin-top:0px; margin-left:0px; ">
+      <!-- #BeginLibraryItem "/library/goods_gallery.lbi" --><!-- #EndLibraryItem --> 
+      </div>
+    </li>
+  </ul>  
+</div>
+<!--商品图片 E-->
+
+<!--根据状态显示内容及数量选择-->
+	<!-- {if $extpintuan.status eq 1} 进行中 -->
+	<div id="page" class="extptbox" >
+        <!--名称，简介等参数-->
+        <div class="extpttitle">{$extpintuan.act_name|escape:html}</div>
+        <div class="ext_jianjie" style="font-size:12px;color:#666; ">{$extpintuan.goods_brief}</div>
+        <div class="ex_bg">
+        <div class="extpthengtw"> 
+       
+            <div class="pt_r">已售：{$extpintuan.virtual_sold}件{if $extpintuan.lucky_extpintuan}
+            <span style="margin-left:10px; color:#F00;border:solid 1px #F00; border-radius:5px; padding:2px;">抽奖团</span>{/if}
+            </div>
+
+
+             <div class="pt_l">
+        <div class="t1">〉
+        </div>
+        <div style="float:right; margin-top:2px; line-height:28px; padding:0 4px; color:#fff; background:#4f4f4f">{$extpintuan.level}人团&nbsp;&nbsp; { $extpintuan.tuanzhangdis}</div> 
+       </div>
+        </div>
+        <div class="ext_jianjie" style="font-size:12px; color:#F00; position:relative">
+            {if $extpintuan.lucky_extpintuan}<span style="color:#F00">本活动为限量抽奖团，限量{$extpintuan.lucky_limit}份。</span>{/if}
+            支付开团并邀请{$extpintuan.share_people}人参加，人数不足自动退款，详见下方活动说明及拼团玩法介绍。<br />
+        </div>  
+           </div>  
+       <!--名称，简介等参数-->
+
+        <div class="td2">
+            <div class="kt which_one">
+                       <!-- {if $pay_url  }  -->
+ 							 <a class="extptbuy_button"  href="{$pay_url}"  >
+                             <span style="width:100%; text-align:center; color:#FFFFFF">您有待付款订单.&nbsp;&nbsp;立即付款&nbsp;&gt;</span>
+                             </a>
+                        <!-- {else}  -->
+                            <!-- {if $extpintuan.need_follow && (!$weixininfo.isfollow ) && $is_wechat_browser  }-->
+                            <a class="kt_item kt_item1" onclick="showReg();">
+                            <!-- {else}  -->
+                            <a class="kt_item kt_item1" onclick="form_extpintuan.submit()">
+                            <!-- {/if}  -->
+                                <div class="kt_left" >立即开团&nbsp;&gt;</div>
+                                <div class="kt_height"><b id="tuan_more_price"></b> ¥{ if $rand_price}{ $show_rand_price}{else}{$extpintuan.show_price}{/if}元</div>
+                            </a>
+							<div style="height:10px;width:100%; clear:both;"></div>
+   						<!-- {/if}  -->
+                        
+                        <form action="extpintuan.php?act=buy" method="post" name="form_extpintuan">
+                          <input type="hidden" name="act_id" value="{$extpintuan.act_id}" />
+                          <input type="hidden" id="extpintuan_number"  name="number" value="1" />
+                          <input type="hidden" name="level" value="{$extpintuan.level}" />                                 
+                        </form>
+            </div>
+        </div>
+   <!-- {elseif $extpintuan.status eq 2 } 已结束 -->
+   <div class="hdsysj" ><p style="width:100%; text-align:center; color:#FFFFFF"> <a href="extpintuan.php" style="color:#FFF">活动已结束</a></p></div>
+      
+    	<!-- {if $extpintuan.lucky_extpintuan} -->
+        <div class="td2">
+              <div class="kt_item_block"></div>
+              <div class="kt which_one" style="height:auto;">
+              <a class="extptbuy_button" style="margin-top:10px;"   href="extpintuan.php?act=luckylist&act_id={$extpintuan.act_id}"  >
+              <div class="hdsysj" style=" background-color:#093; " ><p style="width:100%; text-align:center; color:#FFFFFF">查看抽奖结果&nbsp;&gt;</p></div>
+                                 </a>
+              </div>
+         </div>
+   	  <!-- {/if}  -->
+    <!-- {else } 未开始或已结束 -->
+      <div class="hdsysj" ><p style="width:100%; text-align:center; color:#FFFFFF"> <a href="extpintuan.php" style="color:#FFF">活动未开始</a></p></div>
+    <!-- {/if}  -->
+    
+    
+    
+
+    <!-- {if $extpintuan.choose_number eq 1} -->
+    <section class="goodsBuy radius5" style=" display:block;" >
+        <div class="fields" style=" display:block;">
+          <ul class="quantity">
+            <div class="items">  <span style="color:#999">购买数量：</span> <span class="ui-number radius5">
+              <button type="button" class="decrease radius5" onclick="changenum(-1)">-</button>
+              <input class="num" name="number" id="goods_number" autocomplete="off" value="1" min="1" max="" type="number" />
+              <button type="button" class="increase radius5" onclick="changenum(1)">+</button>
+              </span> </div>
+          </ul>
+        </div>
+    </section>         
+    <!-- {/if}  -->
+</div>
+<!--根据状态显示内容及数量选择 E PRINCE-->
+<div>
+
+
+
+<!--未成团的拼团 begin-->
+<!-- {if $new_extpintuan} -->
+<section class="s-detail">
+<div class="divbox10px"></div>
+<div class="hdjs" id="desc">以下小伙伴正在发起拼团，您可以直接参加</div> 
+<div id="tab1">
+    <div class="desc wrap" style="padding:10px;">
+      <div class="blank2"></div>
+      <!-- {foreach from=$new_extpintuan item=new_extpintuan } -->
+      <a href="extpintuan.php?act=pt_view&pt_id={$new_extpintuan.pt_id}&u={$user_id}">
+      <table width="98%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+      <tr>
+        <td align="left" bgcolor="#ffffff" rowspan="2" width="20%" >
+          <!--{if $new_extpintuan.user_head}-->
+         <img src="{$new_extpintuan.user_head}" style="width:50px;height:auto; margin-left:5px; margin-right:5px; margin-bottom:5px;" >
+         <!--{else}-->
+         <img src="images/extpt_icon_index.png" style="width:50px;height:auto;margin-left:5px; margin-right:5px;margin-bottom:5px;" >
+        <!--{/if }-->
+        </td>
+        <td align="center" bgcolor="#ffffff" colspan="2" >
+        <em style="float:left;font-size:9px;  line-height:20px;margin-left:0px;">{$new_extpintuan.user_nickname}</em>
+        <em style="float:right;font-size:9px; color:#999; line-height:20px;">发起时间：{$new_extpintuan.create_time}</em></td>
+      </tr>
+      <tr>
+        <td align="left" bgcolor="#ffffff" width="30%" style="heihgt:16px; border:solid 1px #D11303;font-size:10px; line-height:16px; margin-left:5px;">
+        &nbsp;&nbsp;{$new_extpintuan.need_people}人团</td>
+        <td align="left" bgcolor="#D11303" style=" border:solid 1px #D11303; font-size:10px; text-align:right; padding-right:10px; color:#FFFFFF; line-height:16px;margin-left:5px;">&nbsp;&nbsp;还差{$new_extpintuan.available_people}人,火速参团>></td>
+      </tr>
+     </table></a>
+    <!-- {/foreach} -->
+    </div>
+  </div>
+</section>
+<!-- {/if } -->
+</div>
+<!---未成团的拼团-->
+
+</div>
+
+
+<!--活动说明 S -->
+<!-- {if $extpintuan.extpintuan_desc} -->
+<section >
+  <div class="divbox10px"></div>
+  <div class="hdjs" id="desc">活动说明：</div> 
+  <div id="tab1" style="padding:10px; background:#FFFFFF;">
+      {$extpintuan.extpintuan_desc}
+  </div>
+</section>      
+<!-- {/if } -->
+<!--活动说明 E -->
+
+<!--商品详情 S -->  
+<!-- {if $pt_goods.goods_desc} -->
+  <div class="hdjs" id="product">商品详情：</div> 
+  <div class="s-detail">
+      <div class="desc wrap">
+      {$pt_goods.goods_desc}
+       </div>
+  </div>
+<!-- {/if } -->
+<!--商品详情 E-->  
+
+</div>
+  <!--商品参数 E--> 
+  <!-- #BeginLibraryItem "/library/page_footer.lbi" -->
+  <!-- #EndLibraryItem -->
+
+</body>
+</html>

@@ -1,0 +1,398 @@
+<!DOCTYPE html >
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <title>{$page_title}</title>
+  <meta name="Keywords" content="{$keywords}" />
+  <meta name="Description" content="{$description}" />
+  <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+  <link rel="stylesheet" type="text/css" href="themesmobile/mo_paleng_moban/css/public.css"/>
+  <link rel="stylesheet" type="text/css" href="themesmobile/mo_paleng_moban/lucky.css" />
+<link rel="stylesheet" type="text/css" href="themesmobile/mo_paleng_moban/css/goods.css"/>
+
+<script type="text/javascript" src="themesmobile/mo_paleng_moban/js/jquery.js"></script>
+<script type="text/javascript" src="themesmobile/mo_paleng_moban/js/TouchSlide.1.1.js"></script>
+{insert_scripts files='jquery.json.js,transport.js'}
+<script type="text/javascript" src="themesmobile/mo_paleng_moban/js/touchslider.dev.js"></script>
+{insert_scripts files='common.js'}
+{insert_scripts files='common.js,lefttime.js,transport.js'}
+
+<script type="text/javascript">
+var available= {$last_lucky_buy.available};
+function changenum(diff) {
+  var num = parseInt(document.getElementById('goods_number').value);
+  var goods_number = num + Number(diff);
+
+  if( goods_number >= 1){
+    if(goods_number>available){
+      document.getElementById('goods_number').value = available;//更新数量
+      document.getElementById('buy_number').value = available;//更新数量
+      alert('对不起，本期最多可购买'+available+'人次');
+    }else{
+      document.getElementById('goods_number').value = goods_number;//更新数量
+      document.getElementById('buy_number').value = goods_number;//更新数量
+    }
+  }
+}
+function onchangenum() {
+  var num = parseInt(document.getElementById('goods_number').value);
+    if(num>available){
+      document.getElementById('goods_number').value = available;//更新数量
+      document.getElementById('buy_number').value = available;//更新数量
+      alert('对不起，本期最多可购买'+available+'人次');
+  }
+  document.getElementById('buy_number').value = num;//更新数量
+}
+function showCode(){
+    document.getElementById('mycode').style.display = 'block';
+    document.getElementById('view_mycode').style.display = 'none';
+}
+
+</script>
+<script>
+/* PRINCE */
+function goBack(){  
+   if(history.length > 1 ){  
+          history.back(-1);  
+    }else{  
+          location.href = 'index.php';
+    }  
+} 
+</script>
+</head>
+<body>
+
+
+{insert name='share'}{insert name='add_url_uid'}
+<script type="text/javascript"> 
+var process_request = "{$lang.process_request}";
+</script> 
+<script language="javascript"> 
+<!--
+/*屏蔽所有的js错误*/
+function killerrors() { 
+return true; 
+} 
+window.onerror = killerrors; 
+//-->
+function tiaozhuan()
+{ 
+//var thisurl = window.location.href;
+document.getElementById("share_form").submit();
+}
+</script> 
+
+<script type="text/javascript">
+        /*第一种形式 第二种形式 更换显示样式*/
+        function setGoodsTab(name,cursel,n){
+          $('html,body').animate({'scrollTop':0},600);
+        for(i=1;i<=n;i++){
+        var menu=document.getElementById(name+i);
+        var con=document.getElementById("user_"+name+"_"+i);
+        menu.className=i==cursel?"on":"";
+        con.style.display=i==cursel?"block":"none";
+        }
+        }
+        </script> 
+
+<!---header-->
+{insert name='add_url_uid'}
+<div class="goods_header">
+  <h2><a class="sb-back" href="javascript:history.back(-1)" title="返回"></a></h2>
+  <ul>
+    <li><a href="javascript:;" class="tab_head on" id="goods_ka1" onClick="setGoodsTab('goods_ka',1,3)">商品</a></li>
+    <li><a href="javascript:;" class="tab_head" id="goods_ka2" onClick="setGoodsTab('goods_ka',2,3), show_goods_desc()">详情</a></li>
+    <li><a href="javascript:;" class="tab_head" id="goods_ka3" onClick="setGoodsTab('goods_ka',3,3)">声明</a></li>
+  </ul>
+  <dl>
+    <dd class="top_bar">
+      <div onClick="show_menu();$('#close_btn').addClass('hid');" id="show_more"><a href="javascript:;"></a></div>
+    </dd>
+    <dt> <a href="flow.php" class="show_cart"><em class="global-nav__nav-shop-cart-num" id="ECS_CARTINFO">{insert name='cart_info'}</em></a></dt>
+  </dl>
+</div>
+<!-- #BeginLibraryItem "/library/up_menu.lbi" --><!-- #EndLibraryItem --> <!--弹出菜单-->
+
+
+<form action="javascript:addToCart({$goods.goods_id})" method="post" id="purchase_form" name="ECS_FORMBUY" >
+<!---商品-->
+
+<div class="main body_bj" id="user_goods_ka_1" style="display:block;">
+<!-- 单品介绍图片 --> 
+<!-- #BeginLibraryItem "/library/goods_gallery.lbi" --><!-- #EndLibraryItem -->
+
+<div class="product_info"> 
+  <!--商品名称、描述、分享-->
+ 
+
+
+  <!--商品参数-->
+  <section class="goodsInfo">
+    <div class="title">
+      <h1>{$lucky_buy.act_name|escape:html}</h1>
+    </div>
+   
+    <!--进度条 S-->
+  <div class="w-goods-info">
+       <p class="w-goods-period">期号：{$last_lucky_buy.schedule_id}</p>
+       <div class="w-progressBar">
+            <p class="wrap">
+                    <span class="bar" style="width:{$last_lucky_buy.schedule}%;"><i class="color"></i></span>
+            </p>
+            <ul class="txt">
+                 <li class="txt-l"><p>总需{$last_lucky_buy.total}人次</p></li>
+                 <li class="txt-r"><p>还有{$last_lucky_buy.available}人次</p></li>
+            </ul>
+       </div>
+   </div>
+  <!--进度条 E--> 
+
+    <div class="title" style="width:100%;float: left;clear: left; background-color:#FFFFFF">
+                  <em style="float:left; color:#999999; font-size:12px; margin-left:5px;">商品价值：¥{$lucky_buy.allprice}</em>      
+                  <em style="float:right; color:#999999; font-size:12px; margin-right:5px;">抽奖单价：¥{$lucky_buy.oneprice}</em>
+    </div>
+    
+  </section>
+  <!--商品参数 E--> 
+  
+ 
+
+<div>
+
+<!--购买数量 S-->
+<section class="" >
+        <div class="fields" style=" display:block;">
+          <ul class="quantity">
+            <div class="items">  <span style="color:#999">请选择购买人次：</span> <span class="ui-number radius5">
+              <button type="button" class="decrease radius5" onclick="changenum(-1)">-</button>
+              <input class="num" name="number" id="goods_number" autocomplete="off" value="1" min="1" max="" type="number" onchange="onchangenum()" />
+              <button type="button" class="increase radius5" onclick="changenum(1)">+</button>
+              </span> </div>
+          </ul>
+        </div>
+</section>   
+<!--购买数量 E-->
+
+<!--当前会员参与情况 S-->
+
+<section class="s-detail">
+    <div class="user_luck_buy">
+        <!-- {if $codes_buy} -->
+        <div class="title">本期您已参与<em>{$count_buy}</em>人次{if $count_buy lt 101}。 抽奖码如下：{/if}</div> 
+            <div id="mycode" {if $count_buy gt 100} style="display:none" {/if}>
+            <!-- {foreach from=$codes_buy item=codes_buy }--> 
+            <div  class="mycode" >{$codes_buy.code}</div>          
+            <!--{/foreach}--> 
+            </div>
+            {if $count_buy gt 100}<div class="title" id="view_mycode" onclick="showCode()">点击查看抽奖码</div> {/if}
+       <!-- {else } -->
+        <div class="title">本期您暂时没有参与</div> 
+       <!-- {/if } -->
+    </div>
+</section>
+
+
+<!--抽奖记录 S  PRINCE--> 
+<div class="hdjs" id=lucky_buy_log>
+      <p >本期参与记录：</p>
+</div>  
+<div id="page" style="right: 0px; left: 0px; display: block; background:#FFFFFF;">
+  <div class="srp list flex-f-row" id="J_ItemList" style="opacity:1;background:#FFFFFF; ">
+    <div class="product flex_in single_item">
+      <div class="pro-inner"></div>
+    </div>
+    <a href="javascript:;" class="get_more"></a> </div>
+   </div>
+</div>
+
+<script type="text/javascript" src="js/jquery.more.js"></script> 
+<script type="text/javascript" src="js/ectouch.js"></script> 
+<script type="text/javascript">
+jQuery(function($){
+  $('#J_ItemList').more({'address': 'lucky_buy.php?act=lucky_buy_log&lucky_buy_id={$last_lucky_buy.lucky_buy_id}', 'spinner_code':'<div style="text-align:center; margin:10px;"><img src="images/category/loader.gif" width="12" height="12"  /></div>'})
+  $(window).scroll(function () {
+    if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+      $('.get_more').click();
+    }
+  });
+});
+</script>
+<!--抽奖记录 E  PRINCE-->  
+</div>
+
+<form name='buyForm' action="lucky_buy.php" method="POST">
+            <input name="act" type="hidden" value="buy">
+            <input name="act_id" type="hidden" value="{$lucky_buy.act_id}"> 
+            <input name="buy_number" id="buy_number" type="hidden" value="1"> 
+            <input name="available" type="hidden" value="{$last_lucky_buy.available}"> 
+
+</form>
+
+
+<div class="activity_nav" >
+
+      <!--{if $lucky_buy.need_follow && (!$weixininfo.isfollow ) && $is_wechat_browser   }-->
+        <a style="display:block;" onclick="showReg();">立即抽奖</a>
+      <!--{else}-->
+     <a style="display:block;" onclick="buyForm.submit();">立即抽奖</a>
+      <!--{/if}-->
+</div>
+
+
+</div>
+
+
+
+</div>
+<!---详情-->
+<div class="main" id="user_goods_ka_2" style="display:none">
+      <div class="product_main" style=" margin-top:40px;">
+      <div class="luck_info">
+          {$lucky_buy_goods.goods_desc}
+        </div>
+        </div>
+      </div> 
+<!---声明-->
+<div class="tab_attrs tab_item hide" id="user_goods_ka_3" style="display:none;">
+        <div class="luck_txt" style=" margin-top:40px;">
+        迎春晚会抽奖活动规则说明<br>
+一、 抽奖活动基本情况说明：<br>
+ 本次晚会设幸运奖400名，奖金100元/名，由集团各单位共选派10名员工抽取，每人抽取40名；三等奖300名，奖金300元/名，由集团各单位共选派10名员工抽取，每人抽取30名；
+二等奖100名，奖金500元/名，由集团各单位选派10名员工抽取，每人抽取10名
+；一等奖2 0名，奖金2000元/名，由集团部分单位共选派5名员工抽取，每人抽取4名；
+特等奖1名，奖金5000元，由集团董事长刘东风抽取。<br>  
+ 二、抽奖活动规则说明：<br>  
+为保证本次抽奖活动的公开、公平、公正，现将抽奖有关规则说明如下： 
+ 1、抽奖券为本次晚会入场券副券，组委会按照集团各单位截止2012年12月27日在册员工每人1张的原则发放，实际发放抽奖券1550张，本次活动中奖率为53%。<br>  
+2、组委会设抽奖活动监督员2名，对抽奖券的发放、回收、装箱、现场抽奖、中奖号码公布及兑奖等环节进行全程监督。  <br>
+3、幸运奖、三等奖产生后，主持人当场宣布部分中奖号码，二等奖、一等奖、特等奖产生后，主持人当场宣布全部中奖号码；所有中奖号码也将同时公布于活动现场公示栏内（中奖号码只公布后4位数，中奖标识为：幸运奖“√” 、三等奖“3” 、 二等奖“2”、一等奖“1”、特等奖“特”），晚会结束后，组委会将各单位员工中奖情况汇总公布到各单位，由各单位进行公示。（中奖结果以抽奖现场封存的中奖号码为准）<br>
+  4、一等奖、特等奖产生后，需中奖人本人持入场券及时到晚会组委会抽奖组核实后方能生效。若中奖人因值班、请法定假或因公出差不在现场的（此类情况由各单位统一向组委会抽奖组备案，备案时间截止2012年12月29上午12：00），中奖号码视为有效，由中奖人所在单位派人代为上台认奖；若中奖人不及时到晚会组委会抽奖组核实的，中奖号码当场作废，由抽奖人另行抽取。<br>
+ 5、二等奖、一等奖、特等奖中奖者在晚会结束后凭入场券到图书馆一楼指定教室兑奖，拒绝代替兑奖；幸运奖、三等奖兑奖安排在元月4日起兑付，由各单位总联系人到总部财务中心统一兑付。<br>  本次抽奖活动最终解释权归南博集团2013年迎春晚会组委会。                                                 
+        </div>
+</div>
+
+
+
+
+
+
+    <!--关注+分享+返回顶部-Start  PRINCE 120029121-->
+         <!--弹出层 S-->
+        <script type="text/javascript">
+            function showFDiv(){
+                document.getElementById('popDiv').style.display = 'block';
+				document.getElementById('hidDiv').style.display = 'block';
+				document.getElementById('cartNum').innerHTML = document.getElementById('goods_number').value;
+				document.getElementById('cartPrice').innerHTML = document.getElementById('ECS_GOODS_AMOUNT').innerHTML;
+            }
+            function closeFDiv(){
+                document.getElementById('popDiv').style.display = 'none';
+				document.getElementById('hidDiv').style.display = 'none';
+				document.getElementById('joinDiv').style.display = 'none';
+            }
+            function showReg(){
+                document.getElementById('popReg').style.display = 'block';
+				document.getElementById('hidReg').style.display = 'block';
+            }
+            function closeReg(){
+                document.getElementById('popReg').style.display = 'none';
+				document.getElementById('hidReg').style.display = 'none';
+            }
+         </script>
+		<script>
+        function goTop(){
+            $('html,body').animate({'scrollTop':0},600);
+        }
+        </script>
+        <div class="tipMask" id="hidDiv" style="display:none; z-index:9000; background-color:#000; opacity:0.5;" ></div>
+        <div class="popGeneral" id="popDiv" style="background:none; top:0px; ">
+        <img src="images/share_guide.png" onClick="closeFDiv()"  width="100%" height="100%"/>
+        </div>
+        
+        
+        
+        <!--关注弹出框 S-->
+        <div class="tipMask" id="hidReg" style="display:none; z-index:9000; background-color:#000; opacity:0.5;" ></div>
+        <div class="popGeneral" id="popReg"  style=" display:none; background:none; bottom:50px;text-align:center;" onclick="closeReg()">
+         <img src="{$_SERVER[HTTP_HOST]}/mobile/images/weixin/lb_qrcode.jpg" style="width:80%;height:auto"  />
+        </div>
+        <!--关注弹出框 E-->
+        
+
+    <!--关注+分享+返回顶部-End  PRINCE 120029121-->
+
+
+
+<script type="text/javascript">
+var gmt_end_time = "{$lucky_buy.gmt_end_time|default:0}";
+{foreach from=$lang.goods_js item=item key=key}
+var {$key} = "{$item}";
+var now_time = {$now_time};
+{/foreach}
+<!-- {literal} -->
+
+onload = function()
+{
+  try
+  {
+    onload_leftTime(now_time);
+  }
+  catch (e)
+  {}
+}
+<!-- {/literal} -->
+</script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script>
+<!-- {/literal} -->
+  wx.config({
+    debug: false,
+    appId: '{$signPackage.appId}',
+    timestamp: {$signPackage.timestamp},
+    nonceStr: '{$signPackage.nonceStr}',
+    signature: '{$signPackage.signature}',
+    jsApiList: [
+        'onMenuShareTimeline',
+        'onMenuShareAppMessage' 
+    ]
+  });
+ wx.ready(function () {
+	//监听“分享给朋友”
+    wx.onMenuShareAppMessage({
+      title: '{if $lucky_buy.share_title }{$lucky_buy.share_title }{else}{$lucky_buy.act_name }{/if}',
+      desc: '{if $lucky_buy.share_brief }{$lucky_buy.share_brief }{else}{$lucky_buy.act_name }{/if}',
+      link: '{$lucky_buy.share_url}',
+      imgUrl: '{if strpos($lucky_buy.share_img,'ttp')>0}{else}{$web_url}{/if}{$lucky_buy.share_img}', //--PRINCE 120029121
+      trigger: function (res) {		
+      },
+      success: function (res) {
+      },
+      cancel: function (res) {
+      },
+      fail: function (res) {
+        alert(JSON.stringify(res));
+      }
+    });
+	
+	//分享到朋友圈
+    wx.onMenuShareTimeline({
+      title: '{if $lucky_buy.share_title }{$lucky_buy.share_title }{else}{$lucky_buy.act_name }{/if}',
+      link: '{$lucky_buy.share_url}',
+      imgUrl: '{if strpos($lucky_buy.share_img,'ttp')>0}{else}{$web_url}{/if}{$lucky_buy.share_img}', //--PRINCE 120029121
+      trigger: function (res) {		
+      },
+      success: function (res) {
+      },
+      cancel: function (res) {
+      },
+      fail: function (res) {
+        alert(JSON.stringify(res));
+      }
+    });
+	
+});
+<!-- {literal} -->
+</script>
+</body>
+</html>

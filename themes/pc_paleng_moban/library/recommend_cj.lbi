@@ -1,0 +1,58 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<div class="index-box index-top">
+  <h2>
+      <i></i>
+      <span class="span-txt">一元抽奖区</span>
+  </h2>
+  <div class="draw-content">
+      <div class="draw-content-left">
+
+          <a href="#"><img src="/images/20170609/pic01.jpg"></a>
+          
+      </div>
+      <div class="draw-content-right">
+         <div class="draw-content-right-top">
+            <div class="draw-content-right-left">
+              <img src="/images/20170609/pic02.jpg">
+              <div class="draw-content-right-cover">
+                <a href="#">
+                    <span class="span-txt">一元开抢</span>
+                    <span class="span-btn">前去抽奖</span>
+                </a>
+              </div>
+            </div>
+            <div class="draw-content-right-right">
+               <a href="#">
+                   <img src="/images/20170609/pic03.jpg">
+               </a>
+               <a href="#">
+                   <img src="/images/20170609/pic04.jpg">
+               </a>
+            </div>
+         </div>
+         <div class="draw-content-right-down">
+            <ul>
+                <li>
+                    <a href="#"><img src="/images/20170609/pic05.jpg"></a>
+                </li>
+                <li>
+                    <a href="#"><img src="/images/20170609/pic05.jpg"></a>
+                </li>
+                <li>
+                    <a href="#"><img src="/images/20170609/pic05.jpg"></a>
+                </li>
+                <li>
+                    <a href="#"><img src="/images/20170609/pic05.jpg"></a>
+                </li>
+            </ul>
+            <div class="draw-content-right-go">
+               <a href="javascript:void(0)">
+                   <i></i>
+                   <span>换一批</span>
+               </a>
+            </div>
+         </div>
+      </div>
+  </div>
+</div>

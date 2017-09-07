@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" -->
+<!-- TemplateEndEditable -->
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
+<link rel="alternate" type="application/rss+xml" title="RSS|{$page_title}" href="{$feed_url}" />
+<link type="text/css" rel="stylesheet" href="themes/pc_paleng_moban/css/qw_wish.css" />
+<script>var jdpts = new Object(); jdpts._st = new Date().getTime();</script>
+<script type="text/javascript" src="themes/pc_paleng_moban/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="themes/pc_paleng_moban/js/jquery-lazyload.js"></script>
+{insert_scripts files='common.js,global.js,compare.js,utils.js'}
+{insert_scripts files='jquery.json.js,transport.js,user.js'}
+</head>
+<body>
+<div>
+<!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+<div class="pic"><img src="/images/20170609/one.png"></div>
+<div class="w1210">
+<div class="one_nav">
+  <ul>
+<!--{if $lotterylist1}-->
+<!-- 一等奖 -->
+<!-- {foreach from=$lotterylist1 item=lt} -->
+    <li>
+      <a href="{$lt.url}">
+        <img src="{$lt.thumb}" alt="{$lt.goods_name|escape:html}">
+        <div class="time" style="display: none;">距离结束24 : 00 : 00</div>
+        <span>{$lt.goods_name|truncate:80:"..."}</span>
+        <p>需要{$lt.point}元</p>
+      </a>
+      <div class="tc"><a href="javascript:tryit({$lt.id},{$lt.winnum},{$lt.pro},{$lt.point});">参与抽奖</a></div>
+      <p style="display: none;">价值：{$lt.shop_price}</p>
+    </li>
+   <!-- {/foreach} -->
+   <!--{/if}-->
+
+<!--{if $lotterylist2}-->
+<!-- 二等奖 -->
+<!-- {foreach from=$lotterylist2 item=lt} -->
+    <li>
+      <a href="{$lt.url}">
+        <img src="{$lt.thumb}" alt="{$lt.goods_name|escape:html}">
+        <div class="time" style="display: none;">距离结束24 : 00 : 00</div>
+        <span>{$lt.goods_name|truncate:80:"..."}</span>
+        <p>需要{$lt.point}积分</p>
+      </a>
+      <div class="tc"><a href="javascript:tryit({$lt.id},{$lt.winnum},{$lt.pro},{$lt.point});">立即抽奖</a></div>
+      <p style="display: none;">价值：{$lt.shop_price}</p>
+    </li>
+   <!-- {/foreach} -->
+   <!--{/if}-->
+
+<!--{if $lotterylist3}-->
+<!-- 二等奖 -->
+<!-- {foreach from=$lotterylist3 item=lt} -->
+    <li>
+      <a href="{$lt.url}">
+        <img src="{$lt.thumb}" alt="{$lt.goods_name|escape:html}">
+        <div class="time" style="display: none;">距离结束24 : 00 : 00</div>
+        <span>{$lt.goods_name|truncate:80:"..."}</span>
+        <p>需要{$lt.point}积分</p>
+      </a>
+      <div class="tc"><a href="javascript:tryit({$lt.id},{$lt.winnum},{$lt.pro},{$lt.point});">立即抽奖</a></div>
+      <p style="display: none;">价值：{$lt.shop_price}</p>
+    </li>
+   <!-- {/foreach} -->
+   <!--{/if}-->
+  </ul>
+</div>
+
+<div class="one_rules">
+  <div class="title">活动规则</div>
+  <div class="text">
+    <p>1、随着人们手机拍照成为一种习惯，每天都会产生一波又一波新的照片，在手机内存有限的情况下，相信很多同学都会选择将自己照片存放在云相册或者网盘上，来节省手机内存的同时，方便管理备份自己的照片。</p>
+    <p>2、但是，身为云相册类产品，除了满足用户备份或储存照片这种基础需求以外，还能为用户做些什么呢？怎么才能让自己变得更有价值？</p>
+    <p>3、接下来分享本周关于相册类产品的一些思考。</p>
+  </div>
+</div>
+</div>
+<script type="text/javascript">
+var t = -100;
+var tt;
+var userid={$user_id};
+//var hash = {if $hash}{$hash}{else}0{/if};//是否验证邮箱
+var hash = 1;
+function tryit(id, winnum, pro, point)
+{
+  if(userid < 0)
+  {
+    checkuserstatus(-3,0,0);
+    return;
+  }
+  if(hash == 0)//邮箱未验证
+  {
+    checkuserstatus(-2,0,'{$email_url}');
+    return;
+  }
+
+    t  = setInterval('rollresult('+id+','+pro+')',50); 
+  tt = setTimeout('delaytry('+id+','+winnum+','+pro+','+point+')',2000); 
+
+  lotteryWindowMessageWait('a',1);
+}
+function delaytry(id, winnum, pro, point)
+{
+  var cmt = new Object;
+  cmt.id=id;
+  cmt.winnum=winnum;
+  cmt.pro=pro;
+  cmt.user_id=userid;
+  cmt.point=point;
+  Ajax.call('lottery.php?act=try', 'cmt=' + cmt.toJSONString(), tryitResponse, 'POST', 'JSON');
+  
+    return false;
+}
+function tryitResponse(result)
+{
+  clearInterval(t);
+  clearTimeout(tt);
+
+  if(result.error==-1)
+  {
+      checkuserstatus(-1,0,0);
+  }
+  else if(result.error==1 || result.error==0)
+  {
+    var user_credit = document.getElementById('user_credit');
+    user_credit.innerHTML=result.credit;
+    lotteryWindowMessage(result,result.error);
+  }
+}
+function rollresult(id,pro)
+{
+  var obj = document.getElementById('trying');
+  var num = Math.floor(Math.random()*pro+1);
+  obj.innerHTML=num;
+}
+</script>
+<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+
+</body>
+</html>

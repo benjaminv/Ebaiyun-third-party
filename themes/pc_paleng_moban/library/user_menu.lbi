@@ -1,0 +1,40 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<div class="navList">
+      <div class="func func1 clearfix">
+        <p class="title"><i></i><span>会员中心</span></p>
+        <a href="user.php" class="item {if $action eq 'default'}curs{/if}"><span>{$lang.label_welcome}</span><i></i></a>
+        <a href="user.php?act=profile" class="item {if $action eq 'profile'}curs{/if}"><span>{$lang.label_profile}</span><i></i></a>
+        <a href="security.php" class="item {if $is_security eq 'true'}curs{/if}"><span>账户安全</span><i></i></a>
+        <a href="user.php?act=address_list" class="item {if $action eq 'address_list'}curs{/if}"><span>{$lang.label_address}</span><i></i></a>
+
+        <a href="user.php?act=account_log" class="item {if $action eq 'account_log'}curs{/if}"><span>{$lang.user_balance}</span><i></i></a>
+
+        <!--{if $show_transform_points}-->
+        <a href="user.php?act=transform_points" class="item {if $action eq 'transform_points'}curs{/if}"><span>{$lang.label_transform_points}</span><i></i></a>
+        <!--{/if}-->
+        <a href="user.php?act=booking_list" class="item {if $action eq 'booking_list'}curs{/if}"><span>{$lang.label_booking}</span><i></i></a>
+
+        <a href="user.php?act=affiliate" class="item {if $action eq 'affiliate'}curs{/if}"><span>{$lang.label_affiliate}</span><i></i></a>
+        <a href="user.php?act=pb_integral" class="item {if $action eq 'pb_integral'}curs{/if}"><span>{$lang.pb_integral}</span><i></i></a>
+        <a href="user.php?act=pb_account" class="item {if $action eq 'pb_account'}curs{/if}"><span>{$lang.pb_account}</span><i></i></a>
+        <a href="user.php?act=coin" class="item {if $action eq 'coin'}curs{/if}"><span>{$lang.coin}</span><i></i></a>
+
+      </div>
+      <div class="func func2 clearfix">
+        <p class="title"><i></i><span>交易中心</span></p>
+
+        <a href="user.php?act=order_list" class="item {if $action eq 'order_list'|| $action eq 'order_detail'}curs{/if}" ><span>{$lang.label_order}</span><i></i></a>
+
+        <a href="extpintuan.php?act=userlist" class="item {if $is_extpintuan eq 'true'}curs{/if}" ><span>{$lang.label_group_buy}</span><i></i></a>
+
+        <a href="lucky_buy.php?act=userlist" class="item {if $is_buy eq 'true'}curs{/if}"><span>{$lang.label_lucky_buy}</span><i></i></a>
+
+        <a href="user.php?act=back_list" class="item {if $action eq 'back_list' || $action eq 'back_order_detail'}curs{/if}"><span>退款/退货</span><i></i></a>
+
+        <a href="user.php?act=my_comment" class="item {if $action eq 'my_comment'}curs{/if}"><span>商品评价</span><i></i></a>
+        <a href="user.php?act=collection_list" class="item {if $action eq 'collection_list'}curs{/if}"><span>商品关注</span><i></i></a>
+        <a href="user.php?act=follow_shop" class="item {if $action eq 'follow_shop'}curs{/if}" title="关注的店铺"><span>店铺关注</span><i></i></a>
+
+      </div>
+
+</div>

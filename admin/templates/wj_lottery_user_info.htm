@@ -1,0 +1,67 @@
+﻿<!-- $Id: wj_lottery_user_info.htm 14216 2008-03-10 02:27:21Z testyang $ -->
+{include file="pageheader.htm"}
+{insert_scripts files="validator.js,../js/utils.js"}
+
+
+
+<form method="post" action="wj_lottery_user.php?act=insert_update" name="theForm" onsubmit="return validate()">
+<div class="main-div">
+<table id="group-table" cellspacing="1" cellpadding="3" width="100%">
+  <tr>
+    <td class="label">商品名称：</td>
+    <td>{$wj_lottery_user.goods_name}
+	</td>
+  </tr>
+  <tr>
+    <td class="label">商品价值：</td>
+    <td>{$wj_lottery_user.shop_price}</td>
+  </tr>
+  <tr>
+  <tr>
+    <td class="label">消耗积分：</td>
+    <td>{$wj_lottery_user.point}</td>
+  </tr>
+  <tr>
+    <td class="label">中奖概率：</td>
+    <td>1/{$wj_lottery_user.pro}
+	</td>
+  </tr>
+  <tr>
+    <td class="label">中奖号码：</td>
+    <td>{$wj_lottery_user.winnum}
+	</td>
+  </tr>
+  <tr>
+    <td class="label">用户：</td>
+    <td>{$wj_lottery_user.user_id}
+	</td>
+  </tr> 
+  <tr>
+    <td class="label">联系方式：</td>
+    <td>{$wj_lottery_user.address}&nbsp;&nbsp;&nbsp;{$wj_lottery_user.tel}
+	</td>
+  </tr>
+  <td class="label">备注：</td>
+    <td><textarea  name="remark" cols="30" rows="3"  >{$wj_lottery_user.remark}</textarea></td>
+  </tr>
+
+  <tr>
+    <td class="label">&nbsp;</td>
+    <td>
+      <input name="id" type="hidden" id="id" value="{$wj_lottery_user.id}" />
+	  <input name="lid" type="hidden" id="lid" value="{$wj_lottery_user.lid}" />
+	  <input name="user_id" type="hidden" id="user_id" value="{$wj_lottery_user.user_id}" />
+	  <input name="status" type="hidden" id="status" value="{$wj_lottery_user.status}" />
+      <input type="submit" name="submit" value="{$lang.button_submit}" class="button" />
+      <input type="reset" value="{$lang.button_reset}" class="button" />
+	  {if $wj_lottery_user.status eq 1}
+      <input type="submit" name="noprize" value="未领奖" class="button" onclick="return confirm('确定设置为未领奖吗?')"/>
+	  {elseif $wj_lottery_user.status eq 0}
+	  <input type="submit" name="prize" value="已领奖" class="button" onclick="return confirm('确定设置为已领奖吗?')"/>
+	  {/if}
+    </td>
+  </tr>
+</table>
+</div>
+</form>
+{include file="pagefooter.htm"}

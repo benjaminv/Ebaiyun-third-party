@@ -1,0 +1,186 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" -->
+<!-- TemplateEndEditable -->
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
+{* 包含脚本文件 *}
+{insert_scripts files='common.js,user.js,transport.js,region.js'}
+<style type="text/css">
+a{color: #3f3f3f;text-decoration: none;}
+</style>
+</head>
+<body>
+<div id="container">
+<!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+<div class="block box">
+<div id="ur_here">
+<!-- #BeginLibraryItem "/library/ur_here.lbi" --><!-- #EndLibraryItem -->
+</div>
+</div>
+
+<div class="block clearfix">
+<!--{if $speech}-->
+<div align="center">
+<a href="{$goods_url}" target="_blank"><img src="{$goods_thumb}"  alt="{$goods_name|escape:html}" style="width:100px; margin-top:15px; height:100px;"/><br />
+{$goods_name}</a>&nbsp;&nbsp;<span style="color:#993333">(价值:￥{$shop_price})</span>
+</div>
+<form name="formspeech" action="javascript:submitmyspeech({$id})" method="post">
+<table align="center">
+    <tr>
+        <td align="right">获奖感言:</td>
+        <td align="left"><textarea id="speech" name="speech" cols="40" rows="3"></textarea></td>
+    </tr>
+    <tr>
+		<td align="right">收货人:</td>
+        <td align="left"><input type="text" name="name" size="41" value="{$consignee.name}"/></td>
+    </tr>
+    <tr>
+		<td align="right">电话:</td>
+        <td align="left"><input type="text" name="tel" size="41"  value="{$consignee.tel}"/></td>
+    </tr>
+    <tr>
+		<td align="right">email:</td>
+        <td align="left"><input type="text" name="email" size="41" value="{$consignee.email}"/></td>
+    </tr>
+    <tr>
+    	<td align="right">配送区域:</td>
+        <td align="left">
+                        <select name="country" id="selCountries_" onchange="region.changed(this, 1, 'selProvinces_{$sn}')" style="border:1px solid #ccc; display:none;">
+                            <option value="0">国家</option>
+                            <!-- {foreach from=$country_list item=country} -->
+                            <option value="{$country.region_id}" {if 6 eq $country.region_id}selected{/if}>{$country.region_name}</option>
+                            <!-- {/foreach} -->
+                          </select>
+                          <select name="province" id="selProvinces_" onchange="region.changed(this, 2, 'selCities_{$sn}')" style="border:1px solid #ccc; ">
+                            <option value="0">省市</option>
+                            <!-- {foreach from=$province_list item=province} -->
+                            <option value="{$province.region_id}" {if $consignee.province eq $province.region_id}selected{/if}>{$province.region_name}</option>
+                            <!-- {/foreach} -->
+                          </select>
+                          <select name="city" id="selCities_" onchange="region.changed(this, 3, 'selDistricts_{$sn}')" style="border:1px solid #ccc;">
+                            <option value="0">城市</option>
+                            <!-- {foreach from=$city_list item=city} -->
+                            <option value="{$city.region_id}" {if $consignee.city eq $city.region_id}selected{/if}>{$city.region_name}</option>
+                            <!-- {/foreach} -->
+                          </select>
+                          <select name="district" id="selDistricts_" {if !$district_list.$sn}style="display:none"{/if} style="border:1px solid #ccc;">
+                            <option value="0">区县</option>
+                            <!-- {foreach from=$district_list item=district} -->
+                            <option value="{$district.region_id}" {if $consignee.district eq $district.region_id}selected{/if}>{$district.region_name}</option>
+                            <!-- {/foreach} -->
+                          </select>
+        </td>
+    </tr>
+    <tr>
+    	<td align="right">详细地址:</td>
+        <td align="left"><input type="text" id="address" name="address" size="41" value="{$consignee.address}" /></td>
+    </tr>
+</table>
+<input type="hidden" id="istaobao" name="istaobao" value="0" />
+<input type="hidden" id="goods_id" name="goods_id" value="{$goods_id}" />
+<input type="hidden" name="lot_id" value="{$id}" />
+<div align="center"><a href="javascript:submitmyspeech({$id})" title="提交我的获奖感言"><img src="images/wish/button11.jpg" border="0" /></a></div><br>
+<font color="#FF0000">为了确保您及时收到货，请务必填写以下信息：1.获奖感言 2.收货人和电话 3.联系方式。否则取消该用户中奖资格。谢谢您的支持！</font>
+</form>
+<!--{/if}-->
+
+<!--{if $winlist}-->
+<div class="wish_other_box">
+        <div class="wish_role_title" align="center"><a href="lottery.php" style="color:#993333; text-decoration:none; height:28px">返回抽奖页面</a></div>
+    	<div class="wish_role_title" align="center"><img src="images/wish/win_list_box_bg.gif" /></div>
+        <table width="100%" border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            
+            <td class="win_list_td_title" width="2" >&nbsp;</td>
+            <td class="win_list_td_title" width="25" >&nbsp;</td>
+            <td class="win_list_td_title" width="208" >奖品</td>
+			<td class="win_list_td_title" width="149" >昵称</td>
+            <td class="win_list_td_title" width="406" >获奖感言</td>
+            <td class="win_list_td_title" width="128" >中奖时间</td>
+          </tr>
+		  <!-- {foreach from=$winlist item=wl} -->
+		                       <tr>
+			<td align="center" valign="middle" class="win_list_td">
+              <a href="goods-{$wl.goods_id}.html" target="_blank" title="{$wl.goods_name}" >
+            <img style="border:1px solid #cccccc; margin:5px;" src="{$wl.goods_thumb}" width="48" height="48"/></a>
+            </td>
+            
+            <td align="center" valign="middle" class="win_list_td">&nbsp;</td>
+
+           
+            <td class="win_list_td" style="line-height:14px;">
+              <a  href="goods.php?id={$wl.goods_id}" target="_blank" title="{$wl.goods_name}">{$wl.goods_name}</a>
+              <br />￥{$wl.shop_price}</td>
+			  <td class="win_list_td" style="line-height:14px;"><span>{$wl.user_name}{if $wl.address1}<br />来自:{$wl.address1}{/if}</span></td>
+            
+             <td class="win_list_td"  style="line-height:14px; padding:3px;">{$wl.speech}</td>
+            <td class="win_list_td" style="line-height:14px;">{$wl.wintime}{if $wl.ip}<br />ip:{$wl.ip}{/if}</td>
+          </tr>
+		  <!-- {/foreach} -->
+
+                     
+                  </table>
+<!-- #BeginLibraryItem "/library/pages.lbi" --><!-- #EndLibraryItem -->
+</div>
+<!--{/if}-->
+</div>
+<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+</div>
+</body>
+<script type="text/javascript">
+function submitmyspeech(lot_id)
+{
+	var cmt = new Object();
+	
+    var formBuy  = document.forms['formspeech'];
+    cmt.id       = formBuy.elements["lot_id"].value;
+	
+	cmt.speech   = formBuy.elements["speech"].value;
+	cmt.name     = formBuy.elements["name"].value;
+	cmt.tel      = formBuy.elements["tel"].value;
+	cmt.email    = formBuy.elements["email"].value;
+	cmt.province = formBuy.elements["province"].value;
+	if(formBuy.elements["city"])
+	{
+		cmt.city     = formBuy.elements["city"].value;
+	}
+	if(formBuy.elements["district"])
+	{
+		cmt.district = formBuy.elements["district"].value;
+	}
+	
+	cmt.goods_id = formBuy.elements["goods_id"].value;
+	cmt.address  = formBuy.elements["address"].value;
+
+	Ajax.call('lottery.php?act=submitspeech', 'cmt=' + cmt.toJSONString(), submitmyspeechResponse, 'POST', 'JSON');	
+}
+function submitmyspeechResponse(result)
+{
+	try{
+		if(result.content != '')
+		{
+			alert(result.content);
+			window.location.href='lottery.php';
+		}
+		else
+		{
+			alert('输入错误！');
+			window.location.reload();
+		}
+	}catch(e)
+	{
+		alert('有异常！');
+	}
+}
+</script>
+</html>
+
